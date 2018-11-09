@@ -1,0 +1,148 @@
+/*utilities*/
+// variables
+
+//color
+$bgColor: #f0f0f0;
+$containerColor:#fff;
+$dark:#000;
+$light: #ddd;
+$light-hover: #fff;
+$primary: #d13333;
+$primary-hover: #f71f1f;
+$secondary: rgb(46, 46, 192);
+$secondary-hover: blue;
+$joker: green;
+$joker-disabled: $primary;
+$text-light: #fff;
+$text-light-hover: #fff;
+$text-dark: #111;
+$progressBar: #3f7dc4;
+
+$font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+.bg-light {
+  background-color: $light;
+}
+.navbar-light {
+  color: $text-dark;
+}
+/*padding*/
+.p-0 {
+  padding: 0;
+}
+.p-1 {
+  padding: 1em;
+}
+.p-2 {
+  padding: 2em;
+}
+.p-3 {
+  padding: 3em;
+}
+.p-4 {
+  padding: 4em;
+}
+.p-5 {
+  padding: 5em;
+}
+
+/*margin*/
+.m-0 {
+  margin: 0;
+}
+.m-1 {
+  margin: 1em;
+}
+.m-2 {
+  margin: 2em;
+}
+.m-3 {
+  margin: 3em;
+}
+
+//text
+.h4 {
+  font-size: 1.5em;
+  margin:0;
+}
+
+//buttons
+button {
+  border-radius: 20px;
+  border: $light solid 2px;
+  background-color: $light;
+  color: $text-dark;
+  padding: 0.5em;
+  min-width: 90px;
+  margin: 0.2em;
+  &:hover {
+    background-color: $light-hover;
+    border: $light solid 2px;
+  }
+}
+.hidden {
+  display: none;
+}
+.visible {
+  display: inherit;
+}
+form {
+  margin: 0 1em;
+  padding: 0;
+  overflow: hidden;
+
+  .form-group {
+    margin: 1em auto;
+    padding: 0;
+
+    label {
+      padding: .5em;
+      margin: 0 ;
+      display: block;
+      border: 2px solid $light;
+      border-radius: 6px;
+      
+    }
+    textarea {
+      margin: 0 auto;
+      display: block;
+      width: 98%;
+      height: 5em;
+      border: 2px solid $light;
+      border-radius: 6px;
+    }
+    input[type=text]{
+      padding:.5em;
+      border: 2px solid $light;
+      border-radius: 6px;
+    }
+    input[type=radio]{
+      margin-top:1em;
+    }
+    select{
+      width:100%;
+      padding: .5em;
+      margin: 0 auto;
+      display: block;
+      border: 2px solid $light;
+      border-radius: 6px;
+      font-size:1em;
+      font-family: $font-family;
+    }
+  }
+}
+
+.inline-form{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+.footer{
+text-align: center;
+}

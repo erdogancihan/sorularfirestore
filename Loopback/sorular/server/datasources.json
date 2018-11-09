@@ -1,0 +1,12 @@
+{
+  "db": {
+    "host": "cluster0-ubipl.azure.mongodb.net",
+    "port": 27017,
+    "url": "mongodb+srv://aaa:Aa123456@cluster0-ubipl.azure.mongodb.net/exam?retryWrites=true",
+    "database": "exam",
+    "password": "Aa123456",
+    "name": "db",
+    "user": "aaa",
+    "connector": "mongodb"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "questions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+
+  "properties": {
+    "topic": {
+      "type": "string",
+      "required": true
+    },
+    "questionText": {
+      "type": "string",
+      "required": true
+    },
+    "answer1": {
+      "type": "string"
+    },
+    "answer2": {
+      "type": "string"
+    },
+    "answer3": {
+      "type": "string"
+    },
+    "answer4": {
+      "type": "string"
+    },
+    "correctAnswer": {
+      "type": "string"
+    },
+    "point": {
+      "type": "string"
+    },
+    "correctAnswerRatio": {
+      "type": "string"
+    },
+    "timesAsked": {
+      "type": "number",
+      "default": 0
+    }
+  },
+
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

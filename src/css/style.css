@@ -1,0 +1,463 @@
+/*utilities*/
+/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.bg-light {
+  background-color: #ddd;
+}
+
+/* line 27, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.navbar-light {
+  color: #111;
+}
+
+/*padding*/
+/* line 31, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-0 {
+  padding: 0;
+}
+
+/* line 34, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-1 {
+  padding: 1em;
+}
+
+/* line 37, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-2 {
+  padding: 2em;
+}
+
+/* line 40, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-3 {
+  padding: 3em;
+}
+
+/* line 43, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-4 {
+  padding: 4em;
+}
+
+/* line 46, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.p-5 {
+  padding: 5em;
+}
+
+/*margin*/
+/* line 51, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.m-0 {
+  margin: 0;
+}
+
+/* line 54, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.m-1 {
+  margin: 1em;
+}
+
+/* line 57, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.m-2 {
+  margin: 2em;
+}
+
+/* line 60, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.m-3 {
+  margin: 3em;
+}
+
+/* line 65, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.h4 {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+/* line 71, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+button {
+  border-radius: 20px;
+  border: #ddd solid 2px;
+  background-color: #ddd;
+  color: #111;
+  padding: 0.5em;
+  min-width: 90px;
+  margin: 0.2em;
+}
+
+/* line 79, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+button:hover {
+  background-color: #fff;
+  border: #ddd solid 2px;
+}
+
+/* line 84, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.hidden {
+  display: none;
+}
+
+/* line 87, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.visible {
+  display: inherit;
+}
+
+/* line 90, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form {
+  margin: 0 1em;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* line 95, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group {
+  margin: 1em auto;
+  padding: 0;
+}
+
+/* line 99, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group label {
+  padding: .5em;
+  margin: 0;
+  display: block;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+/* line 107, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group textarea {
+  margin: 0 auto;
+  display: block;
+  width: 98%;
+  height: 5em;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+/* line 115, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type=text] {
+  padding: .5em;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+/* line 120, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type=radio] {
+  margin-top: 1em;
+}
+
+/* line 123, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group select {
+  width: 100%;
+  padding: .5em;
+  margin: 0 auto;
+  display: block;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* line 136, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.inline-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 146, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.footer {
+  text-align: center;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #f0f0f0;
+  box-sizing: border-box;
+}
+
+/*Layout*/
+/* line 10, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 19, C:/Users/erd/Desktop/web development/sorular/src/sass/_layout.scss */
+.container {
+  margin: auto;
+  max-width: 800px;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+  padding: 0;
+  min-height: 50px;
+  background-color: #000;
+}
+
+/* line 12, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar .navbar-light {
+  color: #fff;
+}
+
+/* line 16, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar-brand {
+  display: inline-block;
+  box-sizing: border-box;
+  color: #111;
+  margin: 0;
+  text-decoration: none;
+  font-weight: 500;
+  height: 50px;
+  padding: 0.5em;
+  padding-top: 5px;
+}
+
+/* line 26, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar-brand:hover {
+  background-color: #d13333;
+}
+
+/* line 29, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.navbar-brand .nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* line 36, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 47, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.nav-item {
+  box-sizing: border-box;
+  margin: auto;
+  display: inline-block;
+  padding-top: 10px;
+  color: #fff;
+  height: 50px;
+}
+
+/* line 55, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.nav-item:hover {
+  background-color: #d13333;
+}
+
+/* line 59, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.nav-item .nav-link {
+  padding: .5em;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.questions-container {
+  background-color: #fff;
+}
+
+/* line 5, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar {
+  min-height: 4em;
+  padding-top: 1em;
+  border-bottom: 1px solid black;
+  background-color: #d13333;
+}
+
+/* line 10, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar .question-bar-item {
+  color: #fff;
+  font-size: 1.2em;
+  padding: 0.5em;
+}
+
+/* line 14, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar .question-bar-item span {
+  font-size: 1.2em;
+}
+
+/* line 19, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question {
+  padding: 1em;
+  text-align: left;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+/* line 25, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.button-answer {
+  min-height: 2.1em;
+  margin: 0.3em 1em;
+  padding: 0.2em;
+  border-radius: 30px;
+  background-color: #d13333;
+  border: none;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+/* line 35, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.button-answer:hover {
+  background-color: #f71f1f;
+  color: #fff;
+}
+
+/* line 40, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.btn-joker {
+  border: none;
+  border-radius: 20px;
+  width: 80px;
+  height: 30px;
+  margin: 1em 0.4em;
+  color: #fff;
+  background-color: green;
+}
+
+/* line 48, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.btn-joker.disabled {
+  background-color: #d13333;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* line 52, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.btn-joker.disabled:hover {
+  background-color: #d13333;
+  color: #fff;
+  border: none;
+}
+
+/* line 59, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.btn-joker:hover {
+  background-color: #fff;
+  color: green;
+  border: green solid 2px;
+}
+
+/* line 66, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progressbar {
+  margin: 10px auto;
+  padding: 0;
+  width: 90%;
+  height: 40px;
+  border: 1px solid #ccc;
+}
+
+/* line 73, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progress {
+  margin: 0;
+  background-color: #3f7dc4;
+  height: 100%;
+  width: 30%;
+}
+
+/* line 78, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progress h3 {
+  margin: auto;
+  padding-top: 10px;
+  padding-left: 50%;
+  color: #fff;
+}
+
+@media (min-width: 320px) {
+  /* line 88, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  .button-answer {
+    width: 100%;
+  }
+}
+
+@media (min-width: 360px) {
+  /* line 93, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  .button-answer {
+    width: 100%;
+  }
+}
+
+@media (min-width: 760px) {
+  /* line 98, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  .button-answer {
+    width: 40%;
+  }
+}
+
+/* line 3, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+table {
+  margin: 1em auto;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* line 8, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+th {
+  background-color: #d13333;
+  color: #fff;
+}
+
+/* line 13, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+tr:nth-child(even) {
+  background-color: #e1e1e1;
+}
+
+/* line 16, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+table,
+th,
+td {
+  text-align: center;
+  vertical-align: center;
+  font-size: 0.9em;
+  padding: 0.5em 0.2em;
+}
+
+/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
+.table {
+  overflow-x: auto;
+}
+
+/* line 2, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.table-header-group {
+  display: table-header-group;
+}
+
+/* line 5, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.table-row {
+  display: table-row;
+}
+
+/* line 8, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.table-column {
+  display: table-column;
+}
+
+/* line 11, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.table-cell {
+  display: table-cell;
+  border: 1px solid black;
+}
+
+/* line 15, C:/Users/erd/Desktop/web development/sorular/src/sass/_admin.scss */
+.remove {
+  display: none;
+}
+
+/*# sourceMappingURL=../css/style.map */
