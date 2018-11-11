@@ -1,16 +1,39 @@
 import React from "react";
 
-const AddQuestion = ({formControl,question, handleView, handleChange, handleSubmit,handleQuestionDelete }) => {
+const AddQuestion = ({
+  formControl,
+  question,
+  handleView,
+  handleChange,
+  handleSubmit,
+  handleQuestionDelete
+}) => {
+  //checks the radio button according to selected question for edit.
+  if (formControl.buttonText === "Düzenle") {
+    let correctAnswer = question.correctAnswer;
+    let radioButtons = document.getElementsByName("cevap");
+    for (let i = 0; i < 4; i++) {
+      if (radioButtons[i].value === correctAnswer)
+        radioButtons[i].checked = true;
+    }
+  }
 
   return (
     <div className="container">
-      <button className={formControl.addQuestionButton} onClick={handleView}>Soru Ekle</button>
+      <button className={formControl.addQuestionButton} onClick={handleView}>
+        Soru Ekle
+      </button>
       <div className={formControl.visible}>
-        <form onSubmit ={handleSubmit}>
+        <form>
           <div className="form-group">
             <label htmlFor="Textarea1">Konu Seçiniz.</label>
-            <select className="form-control" id="topic" onChange={handleChange} value={question.topic}>
-            <option value="tarih">Seçiniz</option>
+            <select
+              className="form-control"
+              id="topic"
+              onChange={handleChange}
+              value={question.topic}
+            >
+              <option value="">Seçiniz</option>
               <option value="tarih">Tarih</option>
               <option value="matematik">Matematik</option>
               <option value="cografya">Coğrafya</option>
@@ -19,7 +42,8 @@ const AddQuestion = ({formControl,question, handleView, handleChange, handleSubm
           <div className="form-group inline-form">
             <label htmlFor="puan">Soru Puanı Giriniz.</label>
             <input
-              type="text"
+              type="number"
+              step="5"
               id="point"
               className="form-control"
               placeholder="Puan"
@@ -139,15 +163,21 @@ const AddQuestion = ({formControl,question, handleView, handleChange, handleSubm
                 id="correctAnswer"
                 value="answer4"
                 onChange={handleChange}
-                checked
               />
             </div>
           </div>
-          <button>{formControl.buttonText}</button> 
-                    
         </form>
-        <button className={formControl.deleteButton} onClick={ ()=>{handleQuestionDelete(question.id)}}>Sil</button> 
-        
+        <div className="inline-form" >
+        <button onClick={handleSubmit}>{formControl.buttonText}</button>
+        <button
+          className={formControl.deleteButton +"btn"}
+          onClick={() => {
+            handleQuestionDelete(question.id);
+          }}
+        >
+          Sil
+        </button>
+        </div>
       </div>
     </div>
   );

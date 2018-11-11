@@ -1,4 +1,4 @@
-import axios from "axios";
+
 
 export const FETCH_QUESTIONS_BEGIN = "FETCH_QUESTIONS_BEGIN";
 export const FETCH_QUESTIONS_SUCCESS = "FETCH_QUESTIONS_SUCCESS";
@@ -52,69 +52,3 @@ export const deleteQuestionFailure = error => ({
 
 
 
-export function fetchQuestions() {
-  return dispatch => {
-    dispatch(fetchQuestionsBegin());
-    return axios
-      .get("http://localhost:3001/api/questions")
-      .then(response => {
-        return dispatch(fetchQuestionsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchQuestionsFailure(error));
-        //Some error occurred
-      });
-  };
-}
-export function addQuestion(question) {
-  return dispatch => {
-    axios
-      .request({
-        method: "post",
-        url: "http://localhost:3001/api/questions",
-        data: question
-      })
-      .then(response => {
-        return dispatch(addQuestionSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(addQuestionFailure(error));
-        //Some error occurred
-      });
-  };
-}
-
-export function editQuestion(question) {
-  let id=question.id;
-  
-  return dispatch => {
-    axios
-      .request({
-        method: "put",
-        url: ("http://localhost:3001/api/questions/"+id),
-        data: question
-      })
-      .then(response => {
-        return dispatch(editQuestionSuccess(question));
-      })
-      .catch(error => {
-        dispatch(editQuestionFailure(error));
-        //Some error occurred
-      });
-  };
-}
-
-
-export function deleteQuestion(question) {
-  let id=question.id;
-  return dispatch => {
-    axios.delete("http://localhost:3001/api/questions/"+id)   
-      .then(response => {
-        return dispatch(deleteQuestionSuccess(question));
-      })
-      .catch(error => {
-        dispatch(deleteQuestionFailure(error));
-        //Some error occurred
-     });
-  };
-}

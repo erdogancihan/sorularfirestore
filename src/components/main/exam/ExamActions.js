@@ -1,7 +1,7 @@
 import React from "react";
 
 import Joker from "./Joker";
-import QuestionProblem from "./QuestionProblem";
+import QuestionProblem from "./ExamQuestionProblem";
 
 const Actions = () => {
   return (

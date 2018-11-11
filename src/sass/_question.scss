@@ -1,16 +1,15 @@
 .questions-container {
-  background-color:$containerColor;
-
+  background-color: $containerColor;
 }
 .question-bar {
   min-height: 4em;
-  padding-top:1em;
-  border-bottom:1px solid black;
-  background-color: $primary;
+  padding-top: 1em;
+  border-bottom: 1px solid black;
+  background-color: $warning;
   .question-bar-item {
-    color:$text-light;
+    color: $text-light;
     font-size: 1.2em;
-    padding:0.5em;
+    padding: 0.5em;
     span {
       font-size: 1.2em;
     }
@@ -20,7 +19,13 @@
   padding: 1em;
   text-align: left;
   font-size: 1.1em;
-  line-height:1.5em;
+  line-height: 1.5em;
+}
+.exam-end {
+  margin: 3em auto;
+  h1 {
+    text-align: center;
+  }
 }
 .button-answer {
   min-height: 2.1em;
@@ -29,14 +34,27 @@
   border-radius: 30px;
   background-color: $primary;
   border: none;
-  color: $text-light;
+  color: $text-dark;
   font-size: 1.1em;
 
   &:hover {
-    background-color: $primary-hover;
-    color: $text-light;
+    background-color: $light-hover;
+    color: $text-dark;
+    border: 2px $light solid;
   }
 }
+.success {
+  background-color: $success;
+}
+.warning {
+  background-color: $warning;
+}
+.pressed{
+  background-color: $light-hover;
+    color: $text-dark;
+    border: 2px $light solid;
+}
+
 .btn-joker {
   border: none;
   border-radius: 20px;
@@ -52,8 +70,7 @@
     &:hover {
       background-color: $joker-disabled;
       color: $text-light;
-      border:none;
-      
+      border: none;
     }
   }
   &:hover {
@@ -61,7 +78,6 @@
     color: $joker;
     border: $joker solid 2px;
   }
- 
 }
 .progressbar {
   margin: 10px auto;
@@ -70,17 +86,16 @@
   height: 40px;
   border: 1px solid #ccc;
 }
-.progress { 
+.progress {
   margin: 0;
   background-color: $progressBar;
   height: 100%;
   width: 30%;
   h3 {
-    margin:auto;
-    padding-top:10px;
-    padding-left:50%;
+    margin: auto;
+    padding-top: 10px;
+    padding-left: 50%;
     color: $text-light;
-    
   }
 }
 

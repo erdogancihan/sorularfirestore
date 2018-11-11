@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 
 import AdminQuestions from "./questions/AdminQuestions";
 import Users from "./users/Users";
-
 import {
   addQuestion,
   fetchQuestions,
   editQuestion,
   deleteQuestion
-} from "../../../store/actions/questionActions";
+} from "../../../store/actions/questionActionCreator";
 
 class AdminPanel extends Component {
   state = {
@@ -34,15 +33,15 @@ class AdminPanel extends Component {
     },
     users: {}
   };
-
+ // fetches data from database when component mounts.
   componentDidMount() {
     this.props.fetchQuestions(this.state);
   }
 
   render() {
-    const { error, loading, questions } = this.props;
+    const {  loading, questions } = this.props;
 
-    //shows addQuestion form
+    //shows addQuestion/editquestion form
     const handleView = () => {
       this.state.formControl.visible === "hidden"
         ? this.setState({
@@ -72,6 +71,7 @@ class AdminPanel extends Component {
       });
     };
 
+
     //Submits a newquestion or edits a question
     const handleSubmit = e => {
       e.preventDefault();
@@ -80,34 +80,8 @@ class AdminPanel extends Component {
       if (this.state.formControl.toggleEditButton === "0") {
         this.props.addQuestion(this.state.question);
       } else {
-        this.props.editQuestion(this.state.question);
-        this.setState({
-          question: {
-            topic: "",
-            point: 0,
-            questionText: "",
-            answer1: "",
-            answer2: "",
-            answer3: "",
-            answer4: "",
-            correctAnswer: "",
-            correctAnswerRatio: "100",
-            timesAsked: "0"
-          },
-          formControl: {
-            visible: "hidden",
-            buttonText: "Gönder",
-            deleteButton: "remove",
-            addQuestionButton: "visible",
-            toggleEditButton: "0"
-          }
-        });
+        this.props.editQuestion(this.state.question);        
       }
-    };
-    //Deletes question
-    const handleQuestionDelete = e => {
-       console.log(this.state.question);
-      this.props.deleteQuestion(this.state.question);
       this.setState({
         question: {
           topic: "",
@@ -121,6 +95,34 @@ class AdminPanel extends Component {
           correctAnswerRatio: "100",
           timesAsked: "0"
         },
+        formControl: {
+          visible: "hidden",
+          buttonText: "Gönder",
+          deleteButton: "remove",
+          addQuestionButton: "visible",
+          toggleEditButton: "0"
+        }
+      });
+    };
+    //Deletes question
+    const handleQuestionDelete = e => {
+       console.log(this.state.question);
+      this.props.deleteQuestion(this.state.question);
+      //clears the state
+      this.setState({
+        question: {
+          topic: "",
+          point: 0,
+          questionText: "",
+          answer1: "",
+          answer2: "",
+          answer3: "",
+          answer4: "",
+          correctAnswer: "",
+          correctAnswerCount: 0,
+          timesAsked: 0
+        },
+        //makes form unvisible
         formControl: {
           visible: "hidden",
           buttonText: "Gönder",

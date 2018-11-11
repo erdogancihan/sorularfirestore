@@ -9,13 +9,13 @@ function Navbar() {
     <nav className="navbar navbar-light bg-light">
       <div className="navbar-brand h4">
         {" "}
-        <Link to="/" className="nav-link">
+        <Link to="/exam" className="nav-link">
           Bilgi Yarışması
         </Link>
       </div>
       <ul className="nav ">
         <li className="nav-item">
-          <Link to="/questions" className="nav-link">
+          <Link to="/exam" className="nav-link">
             Sorular
           </Link>
         </li>

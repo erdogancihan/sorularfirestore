@@ -31,10 +31,10 @@
       "type": "string"
     },
     "point": {
-      "type": "string"
+      "type": "number"
     },
-    "correctAnswerRatio": {
-      "type": "string"
+    "correctAnswerCount": {
+      "type": "number"
     },
     "timesAsked": {
       "type": "number",

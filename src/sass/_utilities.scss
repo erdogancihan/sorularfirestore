@@ -7,8 +7,10 @@ $containerColor:#fff;
 $dark:#000;
 $light: #ddd;
 $light-hover: #fff;
-$primary: #d13333;
-$primary-hover: #f71f1f;
+$primary: $light;
+
+$warning:#f71f1f;
+$success:#75f54e;
 $secondary: rgb(46, 46, 192);
 $secondary-hover: blue;
 $joker: green;
@@ -76,6 +78,7 @@ button {
   padding: 0.5em;
   min-width: 90px;
   margin: 0.2em;
+  outline: none;
   &:hover {
     background-color: $light-hover;
     border: $light solid 2px;
@@ -93,7 +96,7 @@ form {
   overflow: hidden;
 
   .form-group {
-    margin: 1em auto;
+    margin: 0.2em auto;
     padding: 0;
 
     label {
@@ -107,18 +110,28 @@ form {
     textarea {
       margin: 0 auto;
       display: block;
+      padding:.5em;
       width: 98%;
       height: 5em;
       border: 2px solid $light;
       border-radius: 6px;
+      outline: none;
     }
     input[type=text]{
       padding:.5em;
       border: 2px solid $light;
       border-radius: 6px;
+      outline: none;
+    }
+    input[type=number]{
+      padding:.5em;
+      border: 2px solid $light;
+      border-radius: 6px;
+      outline: none;
     }
     input[type=radio]{
       margin-top:1em;
+      outline: none;
     }
     select{
       width:100%;
@@ -129,6 +142,7 @@ form {
       border-radius: 6px;
       font-size:1em;
       font-family: $font-family;
+      outline: none;
     }
   }
 }
