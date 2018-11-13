@@ -32,11 +32,14 @@ class Exam extends Component {
     userPoint: 0,
     sessionEnd: false,
     point: 10,
+
     joker: {
       joker1: true,
       joker2: true,
       joker3: true,
-      timer: 0
+      timer: 0,
+      reset: false,
+      joker50: false
     },
     questionCount: 0,
     sessionStart: false,
@@ -98,12 +101,18 @@ class Exam extends Component {
           sessionStart: true,
           sessionEnd: false,
           tryCount: this.state.tryCount - 1,
-          joker: { joker1: true, joker2: true, joker3: true }
+          joker: {
+            ...this.state.joker,
+            joker1: true,
+            joker2: true,
+            joker3: true
+          }
         });
       }
     };
 
     const point = () => {
+      console.log("point", this.state.questionCount);
       switch (this.state.questionCount) {
         case 5:
           return this.setState(
@@ -277,16 +286,40 @@ class Exam extends Component {
       );
     };
 
-    const joker50 = () => {
+    const handleJoker50 = () => {
       this.setState({
         ...this.state,
         joker: { ...this.state.joker, joker1: false }
       });
-      console.log("joker50");
+     
+
+      if (this.state.joker.joker50 === false) {
+        let array = ["answer1", "answer2", "answer3", "answer4"];
+        let newArray = [];
+        let correct = question.correctAnswer;
+
+        for (let i = 0; i < array.length / 2; i++) {
+          let index = Math.floor(Math.random() * array.length);
+          if (array[index] === correct) {
+            i--;
+          } else {
+            newArray.push(array[index]);
+            array.splice(index, 1);
+          }
+        }
+        this.setState({
+          ...this.state,
+          joker: { ...this.state.joker, joker50: newArray, joker1: false  }
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          joker: { ...this.state.joker, joker50: false, joker1: false  }
+        });
+      }
     };
 
     const jokerPass = () => {
-      point();
       this.setState(
         {
           ...this.state,
@@ -304,11 +337,21 @@ class Exam extends Component {
             timesAsked: question.timesAsked + 1,
             id: question.id
           },
-          index:this.state.index + 1,
-          joker: { ...this.state.joker, joker2: false }
+          index: this.state.index + 1,
+          questionCount: this.state.questionCount + 1,
+          joker: { ...this.state.joker, joker2: false, reset: true }
         },
-        () => editExamQuestion(this.state.question)
+        () => {
+          point();
+          editExamQuestion(this.state.question);
+        }
       );
+      if (this.state.joker.reset === true) {
+        this.setState({
+          ...this.state,
+          joker: { ...this.state.joker, reset: false }
+        });
+      }
     };
 
     const jokerExtendTime = () => {
@@ -344,9 +387,11 @@ class Exam extends Component {
             shuffle={shuffle}
             joker={this.state.joker}
             jokerExtendTime={jokerExtendTime}
+            jokerPass={jokerPass}
+            handleJoker50={handleJoker50}
           />
           <Actions
-            joker50={joker50}
+            handleJoker50={handleJoker50}
             jokerPass={jokerPass}
             jokerExtendTime={jokerExtendTime}
             joker={this.state.joker}
@@ -364,7 +409,7 @@ class Exam extends Component {
             startExam={startExam}
           />
           <Actions
-            joker50={joker50}
+            handleJoker50={handleJoker50}
             jokerPass={jokerPass}
             jokerExtendTime={jokerExtendTime}
             joker={this.state.joker}

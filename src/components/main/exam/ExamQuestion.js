@@ -11,14 +11,13 @@ class Question extends Component {
     answer2: " button-answer",
     answer3: " button-answer",
     answer4: " button-answer",
-    disabled:false,
+    disabled: false,
     id: ""
   };
 
   componentDidMount() {
     this._isMounted = true;
     this.timerID = setInterval(() => this.tick(), 1000);
-    console.log(this.props);
     this.props.shuffle();
   }
 
@@ -45,15 +44,55 @@ class Question extends Component {
   }
 
   render() {
-    const { handleAnswerClick, question } = this.props;
+    const {
+      handleAnswerClick,
+      question,
+      jokerPass,
+      joker,
+      jokerExtendTime,
+      handleJoker50
+    } = this.props;
     //extends time for 30 seconds once
-    if (this.props.joker.timer === 30) {
+    if (joker.timer === 30) {
       this.setState(
         {
           timer: this.state.timer + 30
         },
-        this.props.jokerExtendTime()
+        jokerExtendTime()
       );
+    }
+    if (joker.reset === true) {
+      this.setState(
+        {
+          timer: 30
+        },
+        jokerPass()
+      );
+    }
+
+    if (joker.joker50) {
+      
+      joker.joker50.map(answer => {
+        switch (answer) {
+          case "answer1":
+            return this.setState({
+              answer1: "hidden"
+            });
+          case "answer2":
+            return this.setState({
+              answer2: " hidden"
+            });
+          case "answer3":
+            return this.setState({
+              answer3: " hidden"
+            });
+          case "answer4":
+            return this.setState({
+              answer4: " hidden"
+            });
+        }
+      });
+      handleJoker50();
     }
 
     //resets timer on every answer button click
@@ -81,53 +120,53 @@ class Question extends Component {
             if (question.correctAnswer === "answer1")
               return this.setState({
                 answer1: "button-answer success",
-                disabled:true
+                disabled: true
               });
             else if (question.correctAnswer !== "answer1")
               return this.setState({
                 answer1: " button-answer warning",
                 [question.correctAnswer]: " button-answer success",
-                disabled:true
+                disabled: true
               });
-              
+
             break;
           case "answer2":
             if (question.correctAnswer === "answer2")
               return this.setState({
                 answer2: " button-answer success",
-                disabled:true
+                disabled: true
               });
             else if (question.correctAnswer !== "answer2")
               return this.setState({
                 answer2: " button-answer warning",
                 [question.correctAnswer]: " button-answer success",
-                disabled:true
+                disabled: true
               });
             break;
           case "answer3":
             if (question.correctAnswer === "answer3")
               return this.setState({
                 answer3: " button-answer success",
-                disabled:true
+                disabled: true
               });
             else if (question.correctAnswer !== "answer3")
               return this.setState({
                 answer3: "button-answer warning",
                 [question.correctAnswer]: " button-answer success",
-                disabled:true
+                disabled: true
               });
             break;
           case "answer4":
             if (question.correctAnswer === "answer4")
               return this.setState({
                 answer4: " button-answer success",
-                disabled:true
+                disabled: true
               });
             else if (question.correctAnswer !== "answer4")
               return this.setState({
                 answer4: " button-answer warning",
                 [question.correctAnswer]: " button-answer success",
-                disabled:true
+                disabled: true
               });
             break;
           default:
@@ -146,7 +185,7 @@ class Question extends Component {
             answer2: "button button-answer",
             answer3: "button button-answer",
             answer4: "button button-answer",
-            disabled:false
+            disabled: false
           });
         }, 2000);
       }

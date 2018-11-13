@@ -87,29 +87,29 @@
 }
 
 /* line 89, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
-.hidden {
+button.hidden {
   display: none;
 }
 
-/* line 92, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 93, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .visible {
   display: inherit;
 }
 
-/* line 95, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 96, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form {
   margin: 0 1em;
   padding: 0;
   overflow: hidden;
 }
 
-/* line 100, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 101, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group {
   margin: 0.2em auto;
   padding: 0;
 }
 
-/* line 104, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 105, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group label {
   padding: .5em;
   margin: 0;
@@ -118,7 +118,7 @@ form .form-group label {
   border-radius: 6px;
 }
 
-/* line 112, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 113, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group textarea {
   margin: 0 auto;
   display: block;
@@ -130,7 +130,7 @@ form .form-group textarea {
   outline: none;
 }
 
-/* line 122, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 123, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group input[type=text] {
   padding: .5em;
   border: 2px solid #ddd;
@@ -138,7 +138,7 @@ form .form-group input[type=text] {
   outline: none;
 }
 
-/* line 128, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 129, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group input[type=number] {
   padding: .5em;
   border: 2px solid #ddd;
@@ -146,13 +146,13 @@ form .form-group input[type=number] {
   outline: none;
 }
 
-/* line 134, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 135, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group input[type=radio] {
   margin-top: 1em;
   outline: none;
 }
 
-/* line 138, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 139, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group select {
   width: 100%;
   padding: .5em;
@@ -165,7 +165,7 @@ form .form-group select {
   outline: none;
 }
 
-/* line 152, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 153, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .inline-form {
   display: flex;
   flex-direction: row;
@@ -176,7 +176,7 @@ form .form-group select {
   padding: 0;
 }
 
-/* line 162, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 163, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .footer {
   text-align: center;
 }
@@ -371,7 +371,7 @@ body {
 .btn-joker {
   border: none;
   border-radius: 20px;
-  width: 80px;
+  width: 90px;
   height: 30px;
   margin: 1em 0.4em;
   color: #fff;
