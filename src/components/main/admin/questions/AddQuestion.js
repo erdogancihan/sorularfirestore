@@ -1,5 +1,13 @@
 import React from "react";
 
+//unchecks the radio buttons according to selected question for edit.
+let radioButtons = document.getElementsByName("cevap");
+const resetRadioButtons = () => {
+  for (let i = 0; i < radioButtons.length; i++) {
+    radioButtons[i].checked = false;
+  }
+};
+
 const AddQuestion = ({
   formControl,
   question,
@@ -8,19 +16,26 @@ const AddQuestion = ({
   handleSubmit,
   handleQuestionDelete
 }) => {
+
+  
   //checks the radio button according to selected question for edit.
   if (formControl.buttonText === "Düzenle") {
     let correctAnswer = question.correctAnswer;
-    let radioButtons = document.getElementsByName("cevap");
-    for (let i = 0; i < 4; i++) {
-      if (radioButtons[i].value === correctAnswer)
-        radioButtons[i].checked = true;
+
+    for (let i = 0; i < radioButtons.length; i++) {
+      radioButtons[i].checked = radioButtons[i].value === correctAnswer;
     }
   }
 
   return (
     <div className="container">
-      <button className={formControl.addQuestionButton} onClick={handleView}>
+      <button
+        className={formControl.addQuestionButton}
+        onClick={e => {
+          handleView(e);
+          resetRadioButtons();
+        }}
+      >
         Soru Ekle
       </button>
       <div className={formControl.visible}>
@@ -167,16 +182,18 @@ const AddQuestion = ({
             </div>
           </div>
         </form>
-        <div className="inline-form" >
-        <button onClick={handleSubmit}>{formControl.buttonText}</button>
-        <button
-          className={formControl.deleteButton +"btn"}
-          onClick={() => {
-            handleQuestionDelete(question.id);
-          }}
-        >
-          Sil
-        </button>
+        <div className="inline-form">
+          <button className="button" onClick={handleSubmit}>
+            {formControl.buttonText}
+          </button>
+          <button
+            className={formControl.deleteButton}
+            onClick={() => {
+              handleQuestionDelete(question.id);
+            }}
+          >
+            Sil
+          </button>
         </div>
       </div>
     </div>

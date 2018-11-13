@@ -9,7 +9,7 @@ const ViewUser = () => {
       <td>10.10.2017</td>
       <td>60</td>
       <td>5000</td>
-      <td><button>Düzenle</button></td>     
+      <td><button className="button">Düzenle</button></td>     
     </tr>
     </React.Fragment>
      

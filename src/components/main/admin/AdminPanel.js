@@ -27,8 +27,8 @@ class AdminPanel extends Component {
     formControl: {
       visible: "hidden",
       buttonText: "Gönder",
-      deleteButton: "remove",
-      addQuestionButton: "visible",
+      deleteButton: "remove button",
+      addQuestionButton: "visible button",
       toggleEditButton: "0"
     },
     users: {}
@@ -99,7 +99,7 @@ class AdminPanel extends Component {
           visible: "hidden",
           buttonText: "Gönder",
           deleteButton: "remove",
-          addQuestionButton: "visible",
+          addQuestionButton: "visible button",
           toggleEditButton: "0"
         }
       });
@@ -127,7 +127,7 @@ class AdminPanel extends Component {
           visible: "hidden",
           buttonText: "Gönder",
           deleteButton: "remove",
-          addQuestionButton: "visible",
+          addQuestionButton: "visible button",
           toggleEditButton: "0"
         }
       });
@@ -146,10 +146,10 @@ class AdminPanel extends Component {
         this.setState({
           question: filter[0],
           formControl: {
-            visible: "visible",
+            visible: "visible ",
             buttonText: "Düzenle",
-            deleteButton: "visible",
-            addQuestionButton: "remove",
+            deleteButton: "visible button",
+            addQuestionButton: "remove button",
             toggleEditButton: "1"
           }
         });
@@ -172,7 +172,7 @@ class AdminPanel extends Component {
             visible: "hidden",
             buttonText: "Gönder",
             deleteButton: "remove",
-            addQuestionButton: "visible",
+            addQuestionButton: "visible button",
             toggleEditButton: "0"
           }
         });

@@ -9,6 +9,7 @@ import {
 
 export function fetchQuestion(point) {
   let filter = ':{"point":' + point + "}}";
+  console.log(point)
   return dispatch => {
     dispatch(fetchQuestionBegin());
     return axios
@@ -25,7 +26,6 @@ export function fetchQuestion(point) {
 
 export function editExamQuestion(question) {
   let id = question.id; 
-  console.log("edit..succec", question)
   return dispatch => {
     axios
       .request({
@@ -34,7 +34,6 @@ export function editExamQuestion(question) {
         data: question
       })
       .then(response => {
-        console.log("edit..succec", response)
         return dispatch(editExamQuestionSuccess, question);
       })
       .catch(error => {

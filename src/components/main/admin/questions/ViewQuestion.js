@@ -8,7 +8,7 @@ const ViewQuestion = ({question, handleQuestionEdit}) => {
       <td>{question.timesAsked}</td>
       <td>{question.point}</td>
       <td>{question.correctAnswerCount} %</td>
-      <td><button onClick={()=>{handleQuestionEdit(question.id)}}>Düzenle</button></td>     
+      <td><button className="button" onClick={()=>{handleQuestionEdit(question.id)}}>Düzenle</button></td>     
     </tr>
     </React.Fragment>
      

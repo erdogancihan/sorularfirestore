@@ -1,6 +1,12 @@
 import React from "react";
 
-const ExamFinished = ({ userPoint }) => {
+const ExamFinished = ({ userPoint, tryCount, startExam }) => {
+ 
+ let isDisabled=false;
+  if (tryCount === 0) {
+  isDisabled=true
+  }
+ 
   return (
     <div>
       <div className="flex-container question-bar">
@@ -18,6 +24,12 @@ const ExamFinished = ({ userPoint }) => {
       <div className="question exam-end">
         <h1>Üzgünüz Yarışma Bitti.</h1>
         <h1>Puanınınız:{userPoint}</h1>
+        <h4>Kalan Hakkınız {tryCount}</h4>
+        <div className="flex-container">
+          <button className="button"id="tryAgainButton" onClick={startExam} disabled={isDisabled}>
+            Yeniden Dene
+          </button>
+        </div>
       </div>
     </div>
   );

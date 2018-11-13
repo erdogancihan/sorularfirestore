@@ -70,19 +70,21 @@ Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 //buttons
-button {
+.button {
   border-radius: 20px;
   border: $light solid 2px;
   background-color: $light;
   color: $text-dark;
   padding: 0.5em;
   min-width: 90px;
-  margin: 0.2em;
+  margin: 0.2em auto;
   outline: none;
-  &:hover {
-    background-color: $light-hover;
+  &:hover{
     border: $light solid 2px;
+    background-color: $light-hover;
+    color: $text-dark;
   }
+
 }
 .hidden {
   display: none;
