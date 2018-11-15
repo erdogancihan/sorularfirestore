@@ -1,7 +1,8 @@
 import React from "react";
 import ViewUser from "./ViewUser";
 
-const ViewUsers = () => {
+const ViewUsers = ({users}) => {
+  console.log(users)
   return (
     <div className="container  ">
       <div className="table">
@@ -17,15 +18,9 @@ const ViewUsers = () => {
             </tr>
           </thead>
           <tbody>
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
-            <ViewUser />
+          {users&&users.map(user=>{
+            return <ViewUser key={user.id} user={user}/>
+          })}
           </tbody>
         </table>
       </div>

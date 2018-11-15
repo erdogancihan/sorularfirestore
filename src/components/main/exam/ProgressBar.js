@@ -1,11 +1,13 @@
 import React from "react";
 
-function ProgressBar() {
+function ProgressBar({questionCount}) {
   return (
     <div className="progressbar">
-      <div className="progress">
-        <h3>30/100</h3>
+    <h3>{questionCount+ "/ 50"}</h3>
+      <div className="progress" style={{width: `${questionCount*2}%`}}>
+        
       </div>
+      
     </div>
   );
 }

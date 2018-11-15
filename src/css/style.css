@@ -1,73 +1,89 @@
 /*utilities*/
-/* line 26, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+@import url("https://fonts.googleapis.com/css?family=Libre+Franklin");
+/* line 25, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .bg-light {
   background-color: #ddd;
 }
 
-/* line 29, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 28, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .navbar-light {
   color: #111;
 }
 
 /*padding*/
-/* line 33, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 32, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-0 {
   padding: 0;
 }
 
-/* line 36, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 35, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-1 {
   padding: 1em;
 }
 
-/* line 39, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 38, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-2 {
   padding: 2em;
 }
 
-/* line 42, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 41, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-3 {
   padding: 3em;
 }
 
-/* line 45, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 44, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-4 {
   padding: 4em;
 }
 
-/* line 48, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 47, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .p-5 {
   padding: 5em;
 }
 
 /*margin*/
-/* line 53, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 52, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .m-0 {
   margin: 0;
 }
 
-/* line 56, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 55, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .m-1 {
   margin: 1em;
 }
 
-/* line 59, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 58, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .m-2 {
   margin: 2em;
 }
 
-/* line 62, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 61, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .m-3 {
   margin: 3em;
 }
 
-/* line 67, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 65, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+a {
+  text-decoration: none;
+}
+
+/* line 69, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .h4 {
   font-size: 1.5em;
   margin: 0;
 }
 
 /* line 73, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+p {
+  line-height: 1.5em;
+}
+
+/* line 76, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.center {
+  text-align: center;
+}
+
+/* line 81, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .button {
   border-radius: 20px;
   border: #ddd solid 2px;
@@ -79,50 +95,51 @@
   outline: none;
 }
 
-/* line 82, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 90, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .button:hover {
   border: #ddd solid 2px;
   background-color: #fff;
   color: #111;
 }
 
-/* line 89, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
-button.hidden {
+/* line 96, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.hidden {
   display: none;
 }
 
-/* line 93, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 100, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .visible {
   display: inherit;
 }
 
-/* line 96, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 103, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form {
   margin: 0 1em;
   padding: 0;
   overflow: hidden;
+  min-width: 330px;
 }
 
-/* line 101, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 109, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group {
   margin: 0.2em auto;
   padding: 0;
 }
 
-/* line 105, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 113, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group label {
-  padding: .5em;
+  padding: 0.5em;
   margin: 0;
   display: block;
   border: 2px solid #ddd;
   border-radius: 6px;
 }
 
-/* line 113, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 120, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group textarea {
   margin: 0 auto;
   display: block;
-  padding: .5em;
+  padding: 0.5em;
   width: 98%;
   height: 5em;
   border: 2px solid #ddd;
@@ -130,42 +147,76 @@ form .form-group textarea {
   outline: none;
 }
 
-/* line 123, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
-form .form-group input[type=text] {
-  padding: .5em;
+/* line 130, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type="text"] {
+  padding: 0.7em;
   border: 2px solid #ddd;
   border-radius: 6px;
   outline: none;
 }
 
-/* line 129, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
-form .form-group input[type=number] {
-  padding: .5em;
+/* line 136, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type="number"] {
+  padding: 0.7em;
   border: 2px solid #ddd;
   border-radius: 6px;
   outline: none;
 }
 
-/* line 135, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
-form .form-group input[type=radio] {
+/* line 142, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type="password"] {
+  padding: 0.7em;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* line 149, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type="email"] {
+  padding: 0.7em;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  font-size: .9em;
+}
+
+/* line 156, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+form .form-group input[type="radio"] {
   margin-top: 1em;
   outline: none;
 }
 
-/* line 139, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 160, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 form .form-group select {
   width: 100%;
-  padding: .5em;
+  padding: 0.5em;
   margin: 0 auto;
   display: block;
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 1em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Libre Franklin", sans-serif;
   outline: none;
 }
 
-/* line 153, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 173, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.signup {
+  max-width: 400px;
+  margin: 3em auto;
+}
+
+/* line 176, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.signup h2 {
+  text-align: center;
+}
+
+/* line 179, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.signup .button {
+  margin-top: 1em;
+  width: 150px;
+}
+
+/* line 184, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .inline-form {
   display: flex;
   flex-direction: row;
@@ -176,7 +227,18 @@ form .form-group select {
   padding: 0;
 }
 
-/* line 163, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+/* line 193, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 202, C:/Users/erd/Desktop/web development/sorular/src/sass/_utilities.scss */
 .footer {
   text-align: center;
 }
@@ -185,7 +247,7 @@ form .form-group select {
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Libre Franklin", sans-serif;
   background-color: #f0f0f0;
   box-sizing: border-box;
   outline: none;
@@ -297,23 +359,27 @@ body {
 .question-bar {
   min-height: 4em;
   padding-top: 1em;
-  border-bottom: 1px solid black;
   background-color: #f71f1f;
 }
 
-/* line 9, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 8, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.question-bar h2 {
+  color: #fff;
+}
+
+/* line 11, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .question-bar .question-bar-item {
   color: #fff;
   font-size: 1.2em;
   padding: 0.5em;
 }
 
-/* line 13, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 15, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .question-bar .question-bar-item span {
   font-size: 1.2em;
 }
 
-/* line 18, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 20, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .question {
   padding: 1em;
   text-align: left;
@@ -321,24 +387,24 @@ body {
   line-height: 1.5em;
 }
 
-/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 26, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .exam-end {
   margin: 0 auto;
 }
 
-/* line 26, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 28, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .exam-end h1 {
   line-height: 1em;
   text-align: center;
 }
 
-/* line 30, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 32, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .exam-end h4 {
   margin-top: 1em;
   text-align: center;
 }
 
-/* line 35, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 37, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .button-answer {
   min-height: 2.1em;
   margin: 0.3em 1em;
@@ -408,38 +474,40 @@ body {
   border: 1px solid #ccc;
 }
 
-/* line 90, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+/* line 89, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+.progressbar h3 {
+  margin: auto;
+  padding-top: 8px;
+  padding-left: 45%;
+  color: #f71f1f;
+}
+
+/* line 97, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
 .progress {
+  position: relative;
+  top: -31px;
   margin: 0;
   background-color: #3f7dc4;
   height: 100%;
-  width: 30%;
-}
-
-/* line 95, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
-.progress h3 {
-  margin: auto;
-  padding-top: 10px;
-  padding-left: 50%;
-  color: #fff;
+  width: 0%;
 }
 
 @media (min-width: 320px) {
-  /* line 104, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  /* line 108, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
   .button-answer {
     width: 100%;
   }
 }
 
 @media (min-width: 360px) {
-  /* line 109, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  /* line 113, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
   .button-answer {
     width: 100%;
   }
 }
 
 @media (min-width: 760px) {
-  /* line 114, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
+  /* line 118, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
   .button-answer {
     width: 40%;
   }
@@ -502,6 +570,11 @@ td {
 /* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_reports.scss */
 .table {
   overflow-x: auto;
+}
+
+/* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_home.scss */
+.home {
+  padding: 1em 2em;
 }
 
 /*# sourceMappingURL=../css/style.map */

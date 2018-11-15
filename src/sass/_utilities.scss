@@ -3,14 +3,14 @@
 
 //color
 $bgColor: #f0f0f0;
-$containerColor:#fff;
-$dark:#000;
+$containerColor: #fff;
+$dark: #000;
 $light: #ddd;
 $light-hover: #fff;
 $primary: $light;
 
-$warning:#f71f1f;
-$success:#75f54e;
+$warning: #f71f1f;
+$success: #75f54e;
 $secondary: rgb(46, 46, 192);
 $secondary-hover: blue;
 $joker: green;
@@ -20,8 +20,7 @@ $text-light-hover: #fff;
 $text-dark: #111;
 $progressBar: #3f7dc4;
 
-$font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+$font-family:'Libre Franklin', sans-serif;
 
 .bg-light {
   background-color: $light;
@@ -63,10 +62,19 @@ Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 3em;
 }
 
+a{
+  text-decoration:none;
+}
 //text
 .h4 {
   font-size: 1.5em;
-  margin:0;
+  margin: 0;
+}
+p{
+  line-height: 1.5em;
+}
+.center{
+  text-align: center;
 }
 
 //buttons
@@ -79,14 +87,13 @@ Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   min-width: 90px;
   margin: 0.2em auto;
   outline: none;
-  &:hover{
+  &:hover {
     border: $light solid 2px;
     background-color: $light-hover;
     color: $text-dark;
   }
-
 }
-button.hidden {
+.hidden {
   display: none;
 }
 
@@ -97,60 +104,84 @@ form {
   margin: 0 1em;
   padding: 0;
   overflow: hidden;
+  min-width: 330px;
 
   .form-group {
     margin: 0.2em auto;
     padding: 0;
 
     label {
-      padding: .5em;
-      margin: 0 ;
+      padding: 0.5em;
+      margin: 0;
       display: block;
       border: 2px solid $light;
       border-radius: 6px;
-      
     }
     textarea {
       margin: 0 auto;
       display: block;
-      padding:.5em;
+      padding: 0.5em;
       width: 98%;
       height: 5em;
       border: 2px solid $light;
       border-radius: 6px;
       outline: none;
     }
-    input[type=text]{
-      padding:.5em;
+    input[type="text"] {
+      padding: 0.7em;
       border: 2px solid $light;
       border-radius: 6px;
       outline: none;
     }
-    input[type=number]{
-      padding:.5em;
+    input[type="number"] {
+      padding: 0.7em;
       border: 2px solid $light;
       border-radius: 6px;
       outline: none;
     }
-    input[type=radio]{
-      margin-top:1em;
+    input[type="password"] {
+      
+      padding: 0.7em;
+      border: 2px solid $light;
+      border-radius: 6px;
       outline: none;
     }
-    select{
-      width:100%;
-      padding: .5em;
+    input[type="email"] {
+      padding: 0.7em;
+      border: 2px solid $light;
+      border-radius: 6px;
+      outline: none;
+      font-size: .9em;
+    }
+    input[type="radio"] {
+      margin-top: 1em;
+      outline: none;
+    }
+    select {
+      width: 100%;
+      padding: 0.5em;
       margin: 0 auto;
       display: block;
       border: 2px solid $light;
       border-radius: 6px;
-      font-size:1em;
+      font-size: 1em;
       font-family: $font-family;
       outline: none;
     }
   }
 }
-
-.inline-form{
+.signup{
+  max-width:400px;
+  margin:3em auto;
+  h2{
+    text-align: center;
+  }
+  .button{
+    margin-top: 1em;
+    width: 150px;
+  }
+}
+.inline-form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -159,7 +190,15 @@ form {
   margin: 0;
   padding: 0;
 }
-
-.footer{
-text-align: center;
+.form-group{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+.footer {
+  text-align: center;
 }

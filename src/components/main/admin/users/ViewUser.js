@@ -1,14 +1,14 @@
 import React from "react";
 
-const ViewUser = () => {
+const ViewUser = ({user}) => {
   return (
       <React.Fragment>
     <tr>
       
-      <td>UserName</td>
-      <td>10.10.2017</td>
-      <td>60</td>
-      <td>5000</td>
+      <td>{user.userName}</td>
+      <td>{user.signUpDate}</td>
+      <td>{user.monthPoint}</td>
+      <td>{user.totalPoint}</td>
       <td><button className="button">Düzenle</button></td>     
     </tr>
     </React.Fragment>

@@ -5,7 +5,6 @@
   "options": {
     "validateUpsert": true
   },
-
   "properties": {
     "topic": {
       "type": "string",
@@ -41,9 +40,15 @@
       "default": 0
     }
   },
-
   "validations": [],
   "relations": {},
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": {}
 }

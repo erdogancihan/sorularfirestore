@@ -4,8 +4,10 @@
 .question-bar {
   min-height: 4em;
   padding-top: 1em;
-  border-bottom: 1px solid black;
   background-color: $warning;
+  h2 {
+    color: $text-light;
+  }
   .question-bar-item {
     color: $text-light;
     font-size: 1.2em;
@@ -23,12 +25,12 @@
 }
 .exam-end {
   margin: 0 auto;
-  h1 {    
-    line-height:1em;
+  h1 {
+    line-height: 1em;
     text-align: center;
   }
-  h4{
-    margin-top:1em;
+  h4 {
+    margin-top: 1em;
     text-align: center;
   }
 }
@@ -41,8 +43,6 @@
   border: none;
   color: $text-dark;
   font-size: 1.1em;
-
-
 }
 .success {
   background-color: $success;
@@ -86,18 +86,22 @@
   width: 90%;
   height: 40px;
   border: 1px solid #ccc;
+  h3 {
+    margin: auto;
+    padding-top: 8px;
+    padding-left: 45%;
+    color: $warning;
+    
+  }
 }
 .progress {
+  position: relative;
+  top:-31px;
   margin: 0;
   background-color: $progressBar;
   height: 100%;
-  width: 30%;
-  h3 {
-    margin: auto;
-    padding-top: 10px;
-    padding-left: 50%;
-    color: $text-light;
-  }
+  width: 0%;
+ 
 }
 
 @media (min-width: 320px) {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import AdminQuestions from "./questions/AdminQuestions";
 import Users from "./users/Users";
@@ -9,6 +10,8 @@ import {
   editQuestion,
   deleteQuestion
 } from "../../../store/actions/questionActionCreator";
+import {fetchAllUsers} from "../../../store/actions/userActionsCreator";
+import { setToken } from "../../../store/actions/loginActionsCreator";
 
 class AdminPanel extends Component {
   state = {
@@ -33,13 +36,17 @@ class AdminPanel extends Component {
     },
     users: {}
   };
- // fetches data from database when component mounts.
+
+  // fetches data from database when component mounts.
   componentDidMount() {
-    this.props.fetchQuestions(this.state);
+    setTimeout(() => {
+      this.props.fetchQuestions(this.state, this.props.session.id);
+      this.props.fetchAllUsers(this.props.session.id);
+    }, 1500);
   }
 
   render() {
-    const {  loading, questions } = this.props;
+    const { loading, questions, session,users } = this.props;
 
     //shows addQuestion/editquestion form
     const handleView = () => {
@@ -71,16 +78,15 @@ class AdminPanel extends Component {
       });
     };
 
-
     //Submits a newquestion or edits a question
     const handleSubmit = e => {
       e.preventDefault();
       console.log(this.state.question);
       //it checks if edit button iss toggled. if it is not toggled it dispaches addQuestion action otherwise it dispatches editQuestion action.
       if (this.state.formControl.toggleEditButton === "0") {
-        this.props.addQuestion(this.state.question);
+        this.props.addQuestion(this.state.question, session.session.id);
       } else {
-        this.props.editQuestion(this.state.question);        
+        this.props.editQuestion(this.state.question, session.session.id);
       }
       this.setState({
         question: {
@@ -106,8 +112,8 @@ class AdminPanel extends Component {
     };
     //Deletes question
     const handleQuestionDelete = e => {
-       console.log(this.state.question);
-      this.props.deleteQuestion(this.state.question);
+      console.log(this.state.question);
+      this.props.deleteQuestion(this.state.question, session.session.id);
       //clears the state
       this.setState({
         question: {
@@ -131,7 +137,6 @@ class AdminPanel extends Component {
           toggleEditButton: "0"
         }
       });
-
     };
 
     //shows form and fills form with the selected question's values.
@@ -179,7 +184,7 @@ class AdminPanel extends Component {
       }
     };
 
-   
+    if (session.id === null) return <Redirect to="/" />;
     if (loading) {
       return <div>Loading..</div>;
     }
@@ -195,26 +200,32 @@ class AdminPanel extends Component {
           questions={questions}
           question={this.state.question}
         />
-        <Users />
+        <Users users={users} />
       </div>
     );
   }
 }
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state);
   return {
     questions: state.questions.questions,
     loading: state.questions.loading,
-    error: state.questions.error
+    error: state.questions.error,
+    session: state.session.session,
+    users:state.user.users
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    addQuestion: question => dispatch(addQuestion(question)),
-    editQuestion: question => dispatch(editQuestion(question)),
-    deleteQuestion: question => dispatch(deleteQuestion(question)),
-    fetchQuestions: question => dispatch(fetchQuestions(question))
+    setToken: () => dispatch(setToken()),
+    addQuestion: (question, token) => dispatch(addQuestion(question, token)),
+    editQuestion: (question, token) => dispatch(editQuestion(question, token)),
+    deleteQuestion: (question, token) =>
+      dispatch(deleteQuestion(question, token)),
+    fetchQuestions: (question, token) =>
+      dispatch(fetchQuestions(question, token)),
+      fetchAllUsers:token=>dispatch(fetchAllUsers(token))
   };
 };
 

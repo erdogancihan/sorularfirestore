@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {Redirect} from "react-router-dom";
 
 import StartExam from "./StartExam";
 import Question from "./ExamQuestion";
@@ -7,10 +8,12 @@ import ExamFinished from "./ExamFinished";
 import ProgressBar from "./ProgressBar";
 import Actions from "./ExamActions";
 import Reports from "../report/Reports";
+import Loading from "./loading";
 import {
   fetchQuestion,
   editExamQuestion
 } from "../../../store/actions/examActionsCreator";
+import { editUser } from "../../../store/actions/userActionsCreator";
 
 class Exam extends Component {
   state = {
@@ -32,7 +35,16 @@ class Exam extends Component {
     userPoint: 0,
     sessionEnd: false,
     point: 10,
-
+    user: {
+      userName: "",
+      totalPoint: 0,
+      monthPoint: 0,
+      lastSession: "",
+      signUpDate: "",
+      city: "",
+      id: "",
+      tryOuts: 0
+    },
     joker: {
       joker1: true,
       joker2: true,
@@ -48,7 +60,7 @@ class Exam extends Component {
     buttonWrong: "warning",
     ordered: false,
     index: 0,
-    tryCount: 3
+    tryCount: 0
   };
 
   render() {
@@ -56,7 +68,10 @@ class Exam extends Component {
       examQuestions,
       fetchQuestion,
       editExamQuestion,
-      loading
+      loading,
+      editUser,
+      user,
+      session
     } = this.props;
 
     let question = examQuestions && examQuestions[this.state.index];
@@ -93,19 +108,41 @@ class Exam extends Component {
 
     //starts Exam
     const startExam = () => {
-      if (this.state.tryCount > 0) {
+      let d = new Date()
+      d.setHours(d.getHours()-1)
+     console.log("d", d)
+      let lastSession=user.lastSession;
+      console.log(lastSession)
+
+      if (lastSession < d ) {
+        this.setState({
+          ...this.sate,
+          user: { ...this.state.user, tryOuts: 3 }
+        });
+      }
+      if (this.state.user.tryOuts > 0) {
         console.log("startExam");
         fetchQuestion(this.state.point); //fetches exam questions
         return this.setState({
           ...this.state,
           sessionStart: true,
           sessionEnd: false,
-          tryCount: this.state.tryCount - 1,
           joker: {
             ...this.state.joker,
             joker1: true,
             joker2: true,
             joker3: true
+          },
+          user: {
+            ...this.user,
+            userName: user.userName,
+            totalPoint: user.totalPoint,
+            monthPoint: user.monthPoint,
+            lastSession: new Date(),
+            signUpDate: user.signUpDate,
+            city: user.city,
+            id: user.id,
+            tryOuts: this.state.user.tryOuts - 1
           }
         });
       }
@@ -142,7 +179,7 @@ class Exam extends Component {
               });
             }
           );
-        case 15:
+        case 20:
           return this.setState(
             {
               ...this.state,
@@ -223,9 +260,19 @@ class Exam extends Component {
                   timesAsked: this.state.question.timesAsked + 1,
                   id: this.state.question.id
                 },
-                userPoint: this.state.userPoint + this.state.question.point
+                userPoint: this.state.userPoint + this.state.question.point,
+                user: {
+                  ...this.state.user,
+                  monthPoint:
+                    this.state.user.monthPoint + this.state.question.point,
+                  totalPoint:
+                    this.state.user.totalPoint + this.state.question.point
+                }
               },
-              () => editExamQuestion(this.state.question)
+              () => {
+                editExamQuestion(this.state.question);
+                editUser(this.state.user, session.id);
+              }
             );
           } else {
             this.setState(
@@ -282,6 +329,7 @@ class Exam extends Component {
         },
         () => {
           editExamQuestion(this.state.question);
+          editUser(this.state.user, session.id);
         }
       );
     };
@@ -291,7 +339,6 @@ class Exam extends Component {
         ...this.state,
         joker: { ...this.state.joker, joker1: false }
       });
-     
 
       if (this.state.joker.joker50 === false) {
         let array = ["answer1", "answer2", "answer3", "answer4"];
@@ -309,12 +356,12 @@ class Exam extends Component {
         }
         this.setState({
           ...this.state,
-          joker: { ...this.state.joker, joker50: newArray, joker1: false  }
+          joker: { ...this.state.joker, joker50: newArray, joker1: false }
         });
       } else {
         this.setState({
           ...this.state,
-          joker: { ...this.state.joker, joker50: false, joker1: false  }
+          joker: { ...this.state.joker, joker50: false, joker1: false }
         });
       }
     };
@@ -370,11 +417,19 @@ class Exam extends Component {
     };
 
     //switches to Exam page
+    if(session.id===null){
+      return <Redirect to="/"/>
+    }
     if (this.state.sessionStart === false) {
-      return <StartExam startExam={startExam} />;
+      return <StartExam startExam={startExam} user={user} />;
     }
     //loading
-    if (loading && this.state.questionCount === 0) return <div>Loading...</div>;
+    if (loading && this.state.questionCount === 0)
+      return (
+        <div>
+          <Loading />
+        </div>
+      );
 
     if (this.state.sessionEnd === false) {
       return (
@@ -396,7 +451,7 @@ class Exam extends Component {
             jokerExtendTime={jokerExtendTime}
             joker={this.state.joker}
           />
-          <ProgressBar />
+          <ProgressBar questionCount={this.state.questionCount}  />
           <Reports />
         </div>
       );
@@ -405,7 +460,7 @@ class Exam extends Component {
         <div className="container questions-container">
           <ExamFinished
             userPoint={this.state.userPoint}
-            tryCount={this.state.tryCount}
+            tryCount={user.tryOuts}
             startExam={startExam}
           />
           <Actions
@@ -414,7 +469,7 @@ class Exam extends Component {
             jokerExtendTime={jokerExtendTime}
             joker={this.state.joker}
           />
-          <ProgressBar />
+          <ProgressBar questionCount={this.state.questionCount} />
           <Reports />
         </div>
       );
@@ -426,13 +481,16 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     examQuestions: state.exams.questions,
-    loading: state.exams.loading
+    loading: state.exams.loading,
+    user: state.user.user,
+    session: state.session.session
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     editExamQuestion: question => dispatch(editExamQuestion(question)),
+    editUser: (user, token) => dispatch(editUser(user, token)),
     fetchQuestion: question => dispatch(fetchQuestion(question))
   };
 };

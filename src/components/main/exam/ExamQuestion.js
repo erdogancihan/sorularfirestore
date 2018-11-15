@@ -90,6 +90,8 @@ class Question extends Component {
             return this.setState({
               answer4: " hidden"
             });
+            default:
+            return null;
         }
       });
       handleJoker50();

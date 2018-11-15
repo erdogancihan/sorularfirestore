@@ -1,10 +1,10 @@
 import React from 'react'
 import ViewUsers from "./ViewUsers"
 
-const Users = () => {
+const Users = ({users}) => {
   return (
     <div>
-     <ViewUsers/>
+     <ViewUsers users={users}/>
     </div>
   )
 }
