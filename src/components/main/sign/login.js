@@ -35,7 +35,7 @@ class LogIn extends Component {
         <form onSubmit={handleSubmit}>
           <h2 className="center">SİTEMİZE GİRİŞ YAPIN</h2>
           <div className="form-group">
-            <label className="h6 mt-3" htmlFor="InputEmail1">
+            <label className="form-control" htmlFor="InputEmail1">
               Email adresi
             </label>
             <input
@@ -50,7 +50,7 @@ class LogIn extends Component {
             />
           </div>
           <div className="form-group">
-            <label className="h6 " htmlFor="InputPassword">
+            <label className="form-Control" htmlFor="InputPassword">
               Şifre
             </label>
             <input

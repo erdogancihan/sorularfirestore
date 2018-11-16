@@ -4,22 +4,26 @@ table {
     margin: 1em auto;
     border-collapse: collapse;
     width: 100%;
+    overflow: hidden;
   }
-  th {
+  th{
+    
     background-color: $primary;
-    color: $text-light;
+    color:$light;
   }
   
   tr:nth-child(even) {
-    background-color: #e1e1e1;
+    background-color: $primary-light;
+    color:$dark;
   }
+
   table,
   th,
   td {
     text-align: center;
     vertical-align: center;
     font-size: 0.9em;
-    padding: 0.5em 0.2em;
+    padding: 0.2em 0.2em;
   }
   .table {
     overflow-x: auto;

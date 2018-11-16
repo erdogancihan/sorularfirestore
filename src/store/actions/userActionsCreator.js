@@ -5,15 +5,16 @@ import {
   fetchAllUsersSuccess,
   fetchAllUsersFailure,
   editUserSuccess,
-  editUserFailure
-
+  editUserFailure,
+  fetchSessionBegin,
+  fetchSessionSuccess,
+  fetchSessionFailure
 } from "./userActions";
 
-let loopBack = "https://exam-e22e2.appspot.com/api";
+let loopBack = "https://exam-e22e2.appspot.com/api/";
 
 export function fetchUser(id, token) {
   return dispatch => {
-   
     return axios
       .get(loopBack + "/UserData/" + id + "?access_token=" + token)
       .then(response => {
@@ -27,9 +28,10 @@ export function fetchUser(id, token) {
 }
 
 export function fetchAllUsers(token) {
+  let filter = `[order]=totalPoint%20DESC&[access_token=${token}]`;
   return dispatch => {
     return axios
-      .get(loopBack + "/UserData?access_token=" + token)
+      .get(loopBack + "/UserData?filter" + filter)
       .then(response => {
         return dispatch(fetchAllUsersSuccess(response.data));
       })
@@ -42,7 +44,7 @@ export function fetchAllUsers(token) {
 
 export function editUser(user, token) {
   let id = user.id;
-  console.log(token)
+  console.log(token);
   console.log("edit user", id, user);
   return dispatch => {
     console.log("edit user", user);
@@ -50,7 +52,7 @@ export function editUser(user, token) {
       .request({
         method: "put",
         url: loopBack + "/UserData/" + id + "?access_token=" + token,
-        data:user
+        data: user
       })
       .then(response => {
         return dispatch(editUserSuccess(user));
@@ -58,6 +60,42 @@ export function editUser(user, token) {
       .catch(error => {
         console.log("edit user error", error, user);
         dispatch(editUserFailure(error));
+      });
+  };
+}
+
+export function addSession(session, token) {
+  axios
+    .request({
+      method: "post",
+      url: loopBack + "/sessions?access_token" + token,
+      data: session
+    })
+    .then(response => {
+      return console.log("session added", response.data);
+    })
+    .catch(error => {
+      return console.log("session error", error);
+    });
+}
+
+//2018-11-15T14:20:40.960Z
+export function fetchSession(date) {
+  console.log(date);
+  //date=10;
+  // let filter=`{"where":{"point":${date}}}`
+  let filter = `[where][date][gte]=${date}&filter[order]=point%20DESC&filter[limit]=8`;
+
+  console.log(date);
+  return dispatch => {
+    dispatch(fetchSessionBegin());
+    return axios
+      .get(loopBack + "/sessions?filter" + filter)
+      .then(response => {
+        return dispatch(fetchSessionSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(fetchSessionFailure(error));
         //Some error occurred
       });
   };

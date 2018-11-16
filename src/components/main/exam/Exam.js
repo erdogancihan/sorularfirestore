@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import StartExam from "./StartExam";
 import Question from "./ExamQuestion";
@@ -13,7 +13,10 @@ import {
   fetchQuestion,
   editExamQuestion
 } from "../../../store/actions/examActionsCreator";
-import { editUser } from "../../../store/actions/userActionsCreator";
+import {
+  editUser,
+  addSession
+} from "../../../store/actions/userActionsCreator";
 
 class Exam extends Component {
   state = {
@@ -31,8 +34,11 @@ class Exam extends Component {
       timesAsked: 0,
       id: ""
     },
-    userId: "",
-    userPoint: 0,
+    session: {
+      userId: "",
+      point: 0,
+      date: ""
+    },
     sessionEnd: false,
     point: 10,
     user: {
@@ -108,20 +114,26 @@ class Exam extends Component {
 
     //starts Exam
     const startExam = () => {
-      let d = new Date()
-      d.setHours(d.getHours()-1)
-     console.log("d", d)
-      let lastSession=user.lastSession;
-      console.log(lastSession)
-
-      if (lastSession < d ) {
-        this.setState({
+      let d = new Date();
+      d.setHours(d.getHours() - 1);
+      let lastSession = user.lastSession;
+      this.setState(
+        {
           ...this.sate,
-          user: { ...this.state.user, tryOuts: 3 }
-        });
-      }
+          user: { ...this.state.user, tryOuts: user.tryOuts }
+        },
+        () => {
+          if (lastSession > d) {
+            this.setState({
+              ...this.sate,
+              user: { ...this.state.user, tryOuts: 3 }
+            });
+          }
+          console.log(this.state.user.tryOuts);
+        }
+      );
+
       if (this.state.user.tryOuts > 0) {
-        console.log("startExam");
         fetchQuestion(this.state.point); //fetches exam questions
         return this.setState({
           ...this.state,
@@ -217,6 +229,7 @@ class Exam extends Component {
     //handles answer button click
     const handleAnswerClick = e => {
       e.preventDefault();
+      let dateToday = new Date();
       let askedQuestion = examQuestions.filter(question => {
         return question.id === e.target.id;
       });
@@ -260,7 +273,10 @@ class Exam extends Component {
                   timesAsked: this.state.question.timesAsked + 1,
                   id: this.state.question.id
                 },
-                userPoint: this.state.userPoint + this.state.question.point,
+                session: {
+                  ...this.state.session,
+                  point: this.state.session.point + this.state.question.point
+                },
                 user: {
                   ...this.state.user,
                   monthPoint:
@@ -291,12 +307,20 @@ class Exam extends Component {
                   timesAsked: this.state.question.timesAsked + 1,
                   id: this.state.question.id
                 },
-                userPoint: this.state.userPoint,
+                session: {
+                  ...this.state.session,
+                  point: this.state.session.point,
+                  userId: session.userId,
+                  date: dateToday
+                },
+                questionCount: 0,
+                point: 10,
                 try: this.state.try - 1,
                 sessionEnd: true
               },
               () => {
                 editExamQuestion(this.state.question);
+                addSession(this.state.session, session.id);
               }
             );
             console.log("yanlış", this.state);
@@ -307,6 +331,7 @@ class Exam extends Component {
     //time Over
     const handleTimeOver = question => {
       console.log("süre bitti", question);
+      let dateToday = new Date();
       this.setState(
         {
           question: {
@@ -323,13 +348,20 @@ class Exam extends Component {
             timesAsked: question.timesAsked + 1,
             id: question.id
           },
-          questionCount: question.questionCount + 1,
-          userPoint: this.state.userPoint,
+          questionCount: 0,
+          point: 10,
+          session: {
+            ...this.state.session,
+            point: this.state.session.point,
+            userId: session.userId,
+            date: dateToday
+          },
           sessionEnd: true
         },
         () => {
           editExamQuestion(this.state.question);
           editUser(this.state.user, session.id);
+          addSession(this.state.session, session.id);
         }
       );
     };
@@ -417,8 +449,8 @@ class Exam extends Component {
     };
 
     //switches to Exam page
-    if(session.id===null){
-      return <Redirect to="/"/>
+    if (session.id === null) {
+      return <Redirect to="/" />;
     }
     if (this.state.sessionStart === false) {
       return <StartExam startExam={startExam} user={user} />;
@@ -444,6 +476,7 @@ class Exam extends Component {
             jokerExtendTime={jokerExtendTime}
             jokerPass={jokerPass}
             handleJoker50={handleJoker50}
+            point={this.state.session.point}
           />
           <Actions
             handleJoker50={handleJoker50}
@@ -451,7 +484,7 @@ class Exam extends Component {
             jokerExtendTime={jokerExtendTime}
             joker={this.state.joker}
           />
-          <ProgressBar questionCount={this.state.questionCount}  />
+          <ProgressBar questionCount={this.state.questionCount} />
           <Reports />
         </div>
       );
@@ -459,7 +492,7 @@ class Exam extends Component {
       return (
         <div className="container questions-container">
           <ExamFinished
-            userPoint={this.state.userPoint}
+            userPoint={this.state.session.point}
             tryCount={user.tryOuts}
             startExam={startExam}
           />
@@ -478,7 +511,6 @@ class Exam extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     examQuestions: state.exams.questions,
     loading: state.exams.loading,

@@ -1,67 +1,49 @@
 .navbar {
+  min-height: 50px;
+  background-color: $primary;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
-  margin: auto;
-  padding: 0;
-  min-height: 50px;
-  background-color: $dark;
 
-  .navbar-light {
-    color: $text-light;
-  }
-}
-.navbar-brand {
-  display: inline-block;
-  box-sizing: border-box;
-  color: $text-dark;
-  margin: 0;
-  text-decoration: none;
-  font-weight: 500;
-  height: 50px;
-  padding:0.5em;
-  padding-top:5px;
-  &:hover {
-    background-color: $warning;
-  }
   .nav-link {
     text-decoration: none;
-    color: $text-light;
-    font-weight: 500;
+    columns: $light;
+    font-size: 0.9em;
+    color: $light;
+  }
+  .navbar-brand {
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 10px 5px;
+    &:hover {
+      background-color: $primary-hover;
+      color: $light;
+    }
+  }
+  .nav {
+    margin: 0;
+
+    list-style: none;
+
+    .nav-item {
+      display: inline-block;
+      padding: 12px 10px;
+      color: $light;
+      &:hover {
+        background-color: $primary-hover;
+        color: $light;
+      }
+    }
   }
 }
 
-.nav {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding-top:15px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.nav-item {
-  box-sizing: border-box;
-  margin: auto;
-  display: inline-block;
-  padding-top:10px;
-  color: $text-light;
-
-  height: 50px;
+.user-logo {
+  border-radius: 50%;
+  background-color: $light;
+  color: $primary !important;
   &:hover {
-    background-color: $warning;
-  }
-
-  .nav-link { 
-    
-    padding:.5em;
-   
-    text-decoration: none;
-    color: $text-light;
-    font-weight: 500;
+    background-color: $primary-hover;
+    color: $light !important;
   }
 }

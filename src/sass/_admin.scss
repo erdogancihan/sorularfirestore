@@ -1,18 +1,26 @@
-
-.table-header-group{
-    display:table-header-group;
+.tooltip {
+    position: relative;
+    display: inline-block;
+ 
+    
 }
- .table-row{
-     display:table-row;
- }
- .table-column{
-     display: table-column;
- }
- .table-cell{
-     display:table-cell;
-     border:1px solid black;
- }
- .remove{
-     display:none;
-     
- }
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: rgba(194, 127, 127, 1);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    top: 5px;
+    left: 105%; 
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

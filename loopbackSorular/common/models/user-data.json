@@ -8,7 +8,6 @@
   "properties": {
     "userName": {
       "type": "string"
-     
     },
     "totalPoint": {
       "type": "number",
@@ -24,15 +23,15 @@
     "signUpDate": {
       "type": "string"
     },
-    "city":{
-      "type":"string"
+    "city": {
+      "type": "string"
     },
-    "id":{
-      "type":"string",
+    "id": {
+      "type": "string",
       "id": true
     },
-    "tryOuts":{
-      "type":"number",
+    "tryOuts": {
+      "type": "number",
       "id": true
     }
   },

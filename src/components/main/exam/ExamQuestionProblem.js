@@ -2,7 +2,7 @@ import React from "react";
 
 const QuestionProblem = () => {
   return (
-    <div className="container">
+    <div>
       <div className="flex-container">
         <button className="button">Soruyu Bildir</button>
       </div>

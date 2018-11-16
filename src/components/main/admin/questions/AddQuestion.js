@@ -16,8 +16,6 @@ const AddQuestion = ({
   handleSubmit,
   handleQuestionDelete
 }) => {
-
-  
   //checks the radio button according to selected question for edit.
   if (formControl.buttonText === "Düzenle") {
     let correctAnswer = question.correctAnswer;
@@ -41,7 +39,7 @@ const AddQuestion = ({
       <div className={formControl.visible}>
         <form>
           <div className="form-group">
-            <label htmlFor="Textarea1">Konu Seçiniz.</label>
+            <label htmlFor="topic">Konu Seçiniz.</label>
             <select
               className="form-control"
               id="topic"
@@ -51,11 +49,16 @@ const AddQuestion = ({
               <option value="">Seçiniz</option>
               <option value="tarih">Tarih</option>
               <option value="matematik">Matematik</option>
+              <option value="fen">Fen</option>
+              <option value="din bilgisi">Din Bilgisi</option>
+              <option value="edebiyat">Edebiyat</option>
+              <option value="dünyadan">Dünyadan</option>
+              <option value="cografya">Coğrafya</option>
               <option value="cografya">Coğrafya</option>
             </select>
           </div>
-          <div className="form-group inline-form">
-            <label htmlFor="puan">Soru Puanı Giriniz.</label>
+          <div className="form-group ">
+            <label htmlFor="puan">Soru Puanı Giriniz.(10 ve katları)</label>
             <input
               type="number"
               step="5"
@@ -66,7 +69,7 @@ const AddQuestion = ({
               onChange={handleChange}
             />
           </div>
-          <div className="form-group">
+          <div className="">
             <label htmlFor="Textarea1">Soruyu Giriniz.</label>
             <textarea
               className="form-control"
@@ -78,8 +81,8 @@ const AddQuestion = ({
             />
           </div>
           <label className="form-control">Seçenekleri Giriniz.</label>
-          <div className="form-group inline-form">
-            <div className="inline-form">
+          <div className="inline-form form-group">
+            <div className="form-control">
               <input
                 type="text"
                 id="answer1"
@@ -90,9 +93,6 @@ const AddQuestion = ({
               />
             </div>
             <div className="inline-form">
-              <label className="form-check-label" htmlFor="cevap">
-                Doğru mu?
-              </label>
               <input
                 className="form-check-input"
                 type="radio"
@@ -101,6 +101,9 @@ const AddQuestion = ({
                 value="answer1"
                 onChange={handleChange}
               />
+              <label className="form-check-label" htmlFor="cevap">
+                Doğru mu?
+              </label>
             </div>
           </div>
 
@@ -116,9 +119,6 @@ const AddQuestion = ({
               />
             </div>
             <div className="inline-form">
-              <label className="form-check-label" htmlFor="cevap">
-                Doğru mu?
-              </label>
               <input
                 className="form-check-input"
                 type="radio"
@@ -127,6 +127,9 @@ const AddQuestion = ({
                 value="answer2"
                 onChange={handleChange}
               />
+              <label className="form-check-label" htmlFor="cevap">
+                Doğru mu?
+              </label>
             </div>
           </div>
 
@@ -142,9 +145,6 @@ const AddQuestion = ({
               />
             </div>
             <div className="inline-form">
-              <label className="form-check-label" htmlFor="cevap">
-                Doğru mu?
-              </label>
               <input
                 className="form-check-input"
                 type="radio"
@@ -153,6 +153,9 @@ const AddQuestion = ({
                 value="answer3"
                 onChange={handleChange}
               />
+              <label className="form-check-label" htmlFor="cevap">
+                Doğru mu?
+              </label>
             </div>
           </div>
 
@@ -168,9 +171,6 @@ const AddQuestion = ({
               />
             </div>
             <div className="inline-form">
-              <label className="form-check-label" htmlFor="cevap">
-                Doğru mu?
-              </label>
               <input
                 className="form-check-input"
                 type="radio"
@@ -179,6 +179,9 @@ const AddQuestion = ({
                 value="answer4"
                 onChange={handleChange}
               />
+              <label className="form-check-label" htmlFor="cevap">
+                Doğru mu?
+              </label>
             </div>
           </div>
         </form>

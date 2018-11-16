@@ -50,7 +50,8 @@ class Question extends Component {
       jokerPass,
       joker,
       jokerExtendTime,
-      handleJoker50
+      handleJoker50,
+      point
     } = this.props;
     //extends time for 30 seconds once
     if (joker.timer === 30) {
@@ -114,7 +115,7 @@ class Question extends Component {
         clearInterval(this.timerID);
         setTimeout(() => {
           handleAnswerClick(e);
-        }, 2000);
+        }, 1000);
 
         const clickedButton = e.target.name;
         switch (clickedButton) {
@@ -173,6 +174,7 @@ class Question extends Component {
             break;
           default:
             return this.state;
+            
         }
       }
     };
@@ -189,7 +191,7 @@ class Question extends Component {
             answer4: "button button-answer",
             disabled: false
           });
-        }, 2000);
+        }, 1000);
       }
     };
     return (
@@ -210,8 +212,11 @@ class Question extends Component {
               %
             </span>
           </div>
+          <div className="question-bar-item">
+           Puanınız: <span>{point}</span>
+          </div>
         </div>
-        <div className="question">{question.questionText}</div>
+        <div className="question-text">{question.questionText}</div>
         <form>
           <div className="flex-container">
             <button

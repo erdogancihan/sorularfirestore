@@ -1,7 +1,7 @@
 import React from "react";
 import Report from "./Report";
 
-const ReportsAll = () => {
+const ReportsAll = ({ users }) => {
   return (
     <div className="table">
       <table>
@@ -10,16 +10,13 @@ const ReportsAll = () => {
             <th>Sıra No</th>
             <th>Username</th>
             <th>Üyelik Tarihi</th>
-            <th>Son Yarışma</th>
-            <th>Günlük Puan</th>
             <th>Toplam Puan</th>
           </tr>
         </thead>
         <tbody>
-          <Report />
-          <Report />
-          <Report />
-          <Report />
+         {users&&users.slice(0,10).map((user,index)=>{
+          return <Report key={user.id} user={user} index={index} />;
+         })}
         </tbody>
       </table>
     </div>

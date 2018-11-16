@@ -3,8 +3,8 @@ import React from "react";
 const ViewQuestion = ({question, handleQuestionEdit}) => {
     return (
       <React.Fragment>
-    <tr>      
-      <td>{question.topic}</td>
+    <tr >      
+      <td className="tooltip"><span className="tooltiptext">{question.questionText}</span>{question.topic}</td>
       <td>{question.timesAsked}</td>
       <td>{question.point}</td>
       <td>{question.correctAnswerCount} %</td>

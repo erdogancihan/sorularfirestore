@@ -7,7 +7,10 @@ import {
   editExamQuestionFailure
 } from "./examActions";
 
-let loopBack= "https://exam-e22e2.appspot.com/api";
+
+
+//let loopBack= "http://localhost:3001/api";
+let loopBack= "https://exam-e22e2.appspot.com/api/";
 export function fetchQuestion(point) {
   let filter = ':{"point":' + point + "}}";
   console.log(point)

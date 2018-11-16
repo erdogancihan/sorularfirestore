@@ -17,9 +17,9 @@ const StartExam  = ({ startExam,user }) => {
           <span />
         </div>
       </div>
-      <div className="question exam-end">
+      <div>
        
-       <h4>{"Yarışma Hakkınız: "+ user.tryOuts}</h4>
+       <h4 className="center">{"Yarışma Hakkınız: "+ user.tryOuts}</h4>
        <p className="center">Yarışma hakkı 1 saat sonra tekrar 3 olacaktır.</p>
         <div className="flex-container">
           <button className="button"id="startExamButton" onClick={startExam}>

@@ -1,121 +1,72 @@
-.questions-container {
-  background-color: $containerColor;
-}
 .question-bar {
-  min-height: 4em;
-  padding-top: 1em;
-  background-color: $warning;
-  h2 {
-    color: $text-light;
-  }
+  background-color: $question-bar;
+  margin: 0;
+  margin-bottom: 2em;
+  min-height: 80px;
   .question-bar-item {
-    color: $text-light;
-    font-size: 1.2em;
-    padding: 0.5em;
-    span {
-      font-size: 1.2em;
-    }
-  }
-}
-.question {
-  padding: 1em;
-  text-align: left;
-  font-size: 1.1em;
-  line-height: 1.5em;
-}
-.exam-end {
-  margin: 0 auto;
-  h1 {
-    line-height: 1em;
+    color: $light;
+    padding: 0.5em 0.5em;
+    font-size: 1.1em;
     text-align: center;
   }
-  h4 {
-    margin-top: 1em;
-    text-align: center;
-  }
+}
+
+.question-text {
+  padding: 0.5em;
+  text-align: center;
 }
 .button-answer {
-  min-height: 2.1em;
-  margin: 0.3em 1em;
-  padding: 0.2em;
-  border-radius: 30px;
-  background-color: $primary;
+  outline: none;
+  border-radius: 20px;
   border: none;
-  color: $text-dark;
-  font-size: 1.1em;
+  background-color: $primary;
+  min-height: 30px;
+  width: 300px;
+  padding: 0.2em;
+  color: $light;
+  margin: 0.2em;
 }
 .success {
   background-color: $success;
 }
 .warning {
-  background-color: $warning;
+  background-color: $danger;
 }
-.pressed {
-  background-color: $light-hover;
-  color: $text-dark;
-  border: 2px $light solid;
+.btn-joker {
+  outline: none;
+  border-radius: 20px;
+  border: none;
+  background-color: $success;
+  min-height: 30px;
+  width: 100px;
+  padding: 0.2em;
+  color: $light;
+  margin-top: 2em;
+}
+.disabled {
+  cursor: not-allowed;
+  background-color: $secondary;
 }
 
-.btn-joker {
-  border: none;
-  border-radius: 20px;
-  width: 90px;
-  height: 30px;
-  margin: 1em 0.4em;
-  color: $text-light;
-  background-color: $joker;
-  &.disabled {
-    background-color: $joker-disabled;
-    opacity: 0.6;
-    cursor: not-allowed;
-    &:hover {
-      background-color: $joker-disabled;
-      color: $text-light;
-      border: none;
-    }
-  }
-  &:hover {
-    background-color: $light-hover;
-    color: $joker;
-    border: $joker solid 2px;
-  }
-}
 .progressbar {
-  margin: 10px auto;
-  padding: 0;
-  width: 90%;
+    margin:20px 20px;
+  margin-top: 2em;
   height: 40px;
-  border: 1px solid #ccc;
+  border: 2px solid $primary;
+
   h3 {
-    margin: auto;
-    padding-top: 8px;
-    padding-left: 45%;
-    color: $warning;
-    
+    text-align: center;
+    padding:7px;
+    margin:0
   }
 }
 .progress {
   position: relative;
-  top:-31px;
-  margin: 0;
-  background-color: $progressBar;
-  height: 100%;
-  width: 0%;
- 
+  background-color: $info;
+  height: 40px;
+  width: 100px;
+  top:-39px;
 }
-
-@media (min-width: 320px) {
-  .button-answer {
-    width: 100%;
-  }
-}
-@media (min-width: 360px) {
-  .button-answer {
-    width: 100%;
-  }
-}
-@media (min-width: 760px) {
-  .button-answer {
-    width: 40%;
-  }
+.hidden, .remove {
+  display: none;
 }

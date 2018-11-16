@@ -1,10 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-family;
-  background-color: $bgColor;
   box-sizing: border-box;
   outline: none;
+  font-family: 'Open Sans', sans-serif;
 }
 
 /*Layout*/
@@ -15,11 +14,13 @@ body {
   justify-content: space-around;
   align-items: stretch;
   margin: 0;
-  padding: 0;
+  padding: 0 ;
 }
 .container {
   margin: auto;
-  max-width: 800px;
+  max-width: 700px;
+  padding: 0 2em;
+
  }
 
 

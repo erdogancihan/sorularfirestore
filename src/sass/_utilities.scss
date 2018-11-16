@@ -2,203 +2,109 @@
 // variables
 
 //color
-$bgColor: #f0f0f0;
-$containerColor: #fff;
-$dark: #000;
-$light: #ddd;
-$light-hover: #fff;
-$primary: $light;
 
-$warning: #f71f1f;
-$success: #75f54e;
-$secondary: rgb(46, 46, 192);
-$secondary-hover: blue;
-$joker: green;
-$joker-disabled: $primary;
-$text-light: #fff;
-$text-light-hover: #fff;
-$text-dark: #111;
-$progressBar: #3f7dc4;
+$primary: #EB6864;
+$primary-hover:#ff3831;
+$primary-light: #fcd9d8;
+$secondary: #aaa;
+$success: #22B24C;
+$info: #369;
+$warning: #ce4c82cc;
+$danger:#ff0800;
+$light: #f8f9fa;
+$dark:#222;
 
-$font-family:'Libre Franklin', sans-serif;
+$question-bar:#44a9e4;
 
-.bg-light {
-  background-color: $light;
-}
-.navbar-light {
-  color: $text-dark;
-}
-/*padding*/
-.p-0 {
-  padding: 0;
-}
-.p-1 {
-  padding: 1em;
-}
-.p-2 {
-  padding: 2em;
-}
-.p-3 {
-  padding: 3em;
-}
-.p-4 {
-  padding: 4em;
-}
-.p-5 {
-  padding: 5em;
-}
 
-/*margin*/
-.m-0 {
-  margin: 0;
-}
-.m-1 {
-  margin: 1em;
-}
-.m-2 {
-  margin: 2em;
-}
-.m-3 {
-  margin: 3em;
-}
 
-a{
-  text-decoration:none;
-}
-//text
-.h4 {
-  font-size: 1.5em;
-  margin: 0;
-}
-p{
-  line-height: 1.5em;
-}
 .center{
   text-align: center;
 }
+.justifty{
+text-align: justify;
+text-justify: auto;
+}
+.indent{
+  text-indent:2em;
+}
+form{
+  margin:1.5em 0;
+}
 
-//buttons
-.button {
-  border-radius: 20px;
-  border: $light solid 2px;
-  background-color: $light;
-  color: $text-dark;
-  padding: 0.5em;
-  min-width: 90px;
-  margin: 0.2em auto;
+
+.button{
+  border:none;
+  border-radius:20px;
+  min-width:80px;
   outline: none;
-  &:hover {
-    border: $light solid 2px;
-    background-color: $light-hover;
-    color: $text-dark;
+  padding:0.5em 1em;
+  background-color: $primary;
+  color:$light;  
+  margin:0.3em;
+
+  &:hover{ 
+    color:$light;
+    background-color: $primary-hover;  
   }
 }
-.hidden {
-  display: none;
+a{
+  text-decoration: none;
 }
 
-.visible {
-  display: inherit;
-}
-form {
-  margin: 0 1em;
-  padding: 0;
-  overflow: hidden;
-  min-width: 330px;
 
-  .form-group {
-    margin: 0.2em auto;
-    padding: 0;
-
-    label {
-      padding: 0.5em;
-      margin: 0;
-      display: block;
-      border: 2px solid $light;
-      border-radius: 6px;
-    }
-    textarea {
-      margin: 0 auto;
-      display: block;
-      padding: 0.5em;
-      width: 98%;
-      height: 5em;
-      border: 2px solid $light;
-      border-radius: 6px;
-      outline: none;
-    }
-    input[type="text"] {
-      padding: 0.7em;
-      border: 2px solid $light;
-      border-radius: 6px;
-      outline: none;
-    }
-    input[type="number"] {
-      padding: 0.7em;
-      border: 2px solid $light;
-      border-radius: 6px;
-      outline: none;
-    }
-    input[type="password"] {
-      
-      padding: 0.7em;
-      border: 2px solid $light;
-      border-radius: 6px;
-      outline: none;
-    }
-    input[type="email"] {
-      padding: 0.7em;
-      border: 2px solid $light;
-      border-radius: 6px;
-      outline: none;
-      font-size: .9em;
-    }
-    input[type="radio"] {
-      margin-top: 1em;
-      outline: none;
-    }
-    select {
-      width: 100%;
-      padding: 0.5em;
-      margin: 0 auto;
-      display: block;
-      border: 2px solid $light;
-      border-radius: 6px;
-      font-size: 1em;
-      font-family: $font-family;
-      outline: none;
-    }
-  }
-}
-.signup{
-  max-width:400px;
-  margin:3em auto;
-  h2{
-    text-align: center;
-  }
-  .button{
-    margin-top: 1em;
-    width: 150px;
-  }
-}
-.inline-form {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: stretch;
-  margin: 0;
-  padding: 0;
-}
 .form-group{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: stretch;
-  margin: 0;
-  padding: 0;
+  
+display: flex;
+margin-bottom:1em;
+justify-content: space-between
 }
-.footer {
-  text-align: center;
+label{
+  min-width:130px;
+  margin:0.3em;
+
+}
+input[type="email"]{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:2em;
+  padding:0 1em;
+}
+input[type="password"]{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:2em;
+  padding:0 1em;
+}
+input[type="text"]{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:2em;
+  padding:0 1em;
+}
+input[type="number"]{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:2em;
+  padding:0 1em;
+}
+textarea{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:7em;
+  width:90%;
+  padding:0 1em;
+}
+select{
+  font-family: 'Open Sans', sans-serif;
+  outline:none;
+  border-radius:10px;
+  height:2em;
+  padding:0 1em;
+  width:190px;
 }

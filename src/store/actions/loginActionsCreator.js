@@ -1,7 +1,7 @@
 import axios from "axios";
 import { loginSuccess, loginFailure, logoutSuccess } from "./loginActions";
 
-let loopBack = "https://exam-e22e2.appspot.com/api";
+let loopBack = "http://localhost:3001/api";
 
 export function login(user) {
   return dispatch => {

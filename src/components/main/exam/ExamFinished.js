@@ -21,10 +21,10 @@ const ExamFinished = ({ userPoint, tryCount, startExam }) => {
           <span />
         </div>
       </div>
-      <div className="question exam-end">
-        <h1>Üzgünüz Yarışma Bitti.</h1>
-        <h1>Puanınınız:{userPoint}</h1>
-        <h4>Kalan Hakkınız {tryCount}</h4>
+      <div >
+        <h2 className="center">Üzgünüz Yarışma Bitti.</h2>
+        <h2 className="center">Puanınınız:<span> {userPoint}</span></h2>
+        <h4 className="center">Kalan Hakkınız {tryCount}</h4>
         <div className="flex-container">
           <button className="button"id="tryAgainButton" onClick={startExam} disabled={isDisabled}>
             Yeniden Dene

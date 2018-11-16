@@ -1,0 +1,23 @@
+{
+  "name": "session",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "userId": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "point": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

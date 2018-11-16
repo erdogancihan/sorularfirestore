@@ -11,7 +11,7 @@ import {
   deleteQuestionFailure
 } from "./questionActions";
 
-let loopBack = "http://localhost:3001/api";
+let loopBack = "https://exam-e22e2.appspot.com/api/";
 
 export function fetchQuestions(token) {
   return dispatch => {

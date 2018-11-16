@@ -13,7 +13,7 @@ class signUp extends Component {
       totalPoint: 0,
       monthPoint: 0,
       lastSession: "",
-      tryOuts:0
+      tryOuts:3
     },
     email: "",
     password: "",
@@ -23,7 +23,7 @@ class signUp extends Component {
   render() {
     const { login } = this.props;
 
-    let loopBack = "https://exam-e22e2.appspot.com/api";
+    let loopBack = "https://exam-e22e2.appspot.com/api/";
     const handleSubmit = e => {
       e.preventDefault();
 
@@ -107,7 +107,7 @@ class signUp extends Component {
     return (
       <div className="flex-container ">
         <form onSubmit={handleSubmit}>
-          <h2>SİTEMİZE ÜYE OLUN</h2>
+          <h2 className="center">SİTEMİZE ÜYE OLUN</h2>
           <div className="form-group">
             <label className="h6 mt-3" htmlFor="InputEmail1">
               Email adresi

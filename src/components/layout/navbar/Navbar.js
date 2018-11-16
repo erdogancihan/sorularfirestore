@@ -14,7 +14,7 @@ class Navbar extends Component {
   };
 
   componentDidMount() {
-//if session id is null it dispatch setToken to get token from local storage
+    //if session id is null it dispatch setToken to get token from local storage
     if (this.props.session.id === null) {
       this.props.setToken();
     }
@@ -23,9 +23,7 @@ class Navbar extends Component {
   componentDidUpdate() {
     //if session is active it fetches user information by userid
     if (this.props.session.id !== null) {
-
       if (this.props.user === null) {
-
         this.props.fetchUser(this.props.session.userId, this.props.session.id);
       }
     }
@@ -33,7 +31,7 @@ class Navbar extends Component {
 
   render() {
     const { session, user } = this.props;
-//logs out
+    //logs out
     const handleLogout = e => {
       e.preventDefault();
       this.props.logOut(session.id);
@@ -43,7 +41,8 @@ class Navbar extends Component {
     //logedout links are visible
     if (session.id === null) {
       Links = <SignedOutLinks />;
-    } else if (user !== null) {//logedin links are visible
+    } else if (user !== null) {
+      //logedin links are visible
       Links = (
         <React.Fragment>
           <AdminLinks />
@@ -53,19 +52,17 @@ class Navbar extends Component {
     }
 
     return (
-      <nav className="navbar navbar-light bg-light">
-        <div className="navbar-brand h4">
+      <nav className="navbar">
+        <div className="navbar-brand">
           {" "}
           <Link to="/" className="nav-link">
             Bilgi Yarışması
           </Link>
         </div>
         <ul className="nav ">
-          <li className="nav-item">
-            <Link to="/exam" className="nav-link">
-              Yarışma
-            </Link>
-          </li>
+          <Link to="/exam" className="nav-link">
+            <li className="nav-item">Yarışma</li>
+          </Link>
           {Links}
         </ul>
       </nav>
