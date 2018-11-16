@@ -23,13 +23,13 @@ class signUp extends Component {
   render() {
     const { login } = this.props;
 
-    let loopBack = "https://exam-e22e2.appspot.com/api/";
+    let loopBack = "https://exam-e22e2.appspot.com/api";
     const handleSubmit = e => {
       e.preventDefault();
 
       if (this.state.password === this.state.password1) {
         addUser(this.state);
-        this.props.history.goBack();
+        this.props.history.push("/");
         console.log(this.state);
       } else {
         alert("Şifreler Eşleşmiyor. Lütfen Tekrar deneyiniz.");

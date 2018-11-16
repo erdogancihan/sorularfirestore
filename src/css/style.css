@@ -143,7 +143,7 @@ body {
 
 /* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar {
-  min-height: 50px;
+  min-height: 45px;
   background-color: #EB6864;
   display: flex;
   flex-direction: row;
@@ -155,53 +155,94 @@ body {
 .navbar .nav-link {
   text-decoration: none;
   columns: #f8f9fa;
-  font-size: 0.9em;
+  font-size: 1em;
   color: #f8f9fa;
 }
 
-/* line 15, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 16, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar .navbar-brand {
   font-size: 1.2em;
   font-weight: 600;
   padding: 10px 5px;
 }
 
-/* line 19, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 20, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar .navbar-brand:hover {
   background-color: #ff3831;
   color: #f8f9fa;
 }
 
-/* line 24, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 25, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar .nav {
   margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-/* line 29, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 31, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar .nav .nav-item {
+  margin: 0;
   display: inline-block;
   padding: 12px 10px;
   color: #f8f9fa;
 }
 
-/* line 33, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 36, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .navbar .nav .nav-item:hover {
   background-color: #ff3831;
   color: #f8f9fa;
 }
 
-/* line 41, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 44, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .user-logo {
   border-radius: 50%;
   background-color: #f8f9fa;
   color: #EB6864 !important;
 }
 
-/* line 45, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 48, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .user-logo:hover {
   background-color: #ff3831;
   color: #f8f9fa !important;
+}
+
+/* line 54, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* line 58, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #EB6864;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* line 66, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content a {
+  color: #f8f9fa;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* line 72, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown-content a:hover {
+  background-color: #ff3831;
+}
+
+/* line 75, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* line 79, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.dropdown:hover .dropbtn {
+  background-color: #EB6864;
 }
 
 /* line 1, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */
@@ -289,7 +330,7 @@ body {
   background-color: #369;
   height: 40px;
   width: 100px;
-  top: -39px;
+  top: -40px;
 }
 
 /* line 70, C:/Users/erd/Desktop/web development/sorular/src/sass/_question.scss */

@@ -7,17 +7,17 @@ import {
   editExamQuestionFailure
 } from "./examActions";
 
-
-
 //let loopBack= "http://localhost:3001/api";
-let loopBack= "https://exam-e22e2.appspot.com/api/";
-export function fetchQuestion(point) {
-  let filter = ':{"point":' + point + "}}";
-  console.log(point)
+let loopBack = "https://exam-e22e2.appspot.com/api";
+export function fetchQuestion(point, topic) {
+  let filter = `[where][point]=${point}&filter[where][topic][regexp]=${topic}`;
+
+  //let filter = ':{"point":' + point + "}}";
+  console.log(point);
   return dispatch => {
     dispatch(fetchQuestionBegin());
     return axios
-      .get(loopBack +'/questions?filter={"where"' + filter)
+      .get(loopBack + "/questions?filter" + filter)
       .then(response => {
         return dispatch(fetchQuestionSuccess(response.data));
       })
@@ -29,12 +29,12 @@ export function fetchQuestion(point) {
 }
 
 export function editExamQuestion(question) {
-  let id = question.id; 
+  let id = question.id;
   return dispatch => {
     axios
       .request({
         method: "put",
-        url: loopBack +"/questions/" + id,
+        url: loopBack + "/questions/" + id,
         data: question
       })
       .then(response => {

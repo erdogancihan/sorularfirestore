@@ -60,9 +60,23 @@ class Navbar extends Component {
           </Link>
         </div>
         <ul className="nav ">
-          <Link to="/exam" className="nav-link">
-            <li className="nav-item">Yarışma</li>
-          </Link>
+          <div className="dropdown">
+            <li className="nav-item nav-link dropbtn">Yarışma</li>
+            <div className="dropdown-content">
+              <Link to="/exam/all">Tümü</Link>
+              <Link to="/exam/0matematik">Matematik</Link>
+              <Link to="/exam/0tarih">Tarih</Link>
+              <Link to="/exam/0fen">Fen</Link>
+              <Link to="/exam/0din bilgisi">Din Bilgisi</Link>
+              <Link to="/exam/0edebiyat">Edebiyat</Link>
+              <Link to="/exam/0dünyadan">Dünyadan</Link>
+              <Link to="/exam/0cografya">Coğrafya</Link>
+              <Link to="/exam/0ingilizce">İngilizce</Link>
+              <Link to="/exam/0almanca">Almanca</Link>
+              <Link to="/exam/0fransızca">Fransızca</Link>
+            </div>
+          </div>
+
           {Links}
         </ul>
       </nav>

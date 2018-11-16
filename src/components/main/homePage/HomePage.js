@@ -17,9 +17,9 @@ const HomePage = () => {
       <p className="justify indent">
         Yarışma içerisinde 4 seçenekli sorular bulunmaktadır ve her sorunun tek
         cevabı vardır. Sorular bir soru havuzu içerisinden rastgele
-        seçilir.Sorular kolaydan zora doğru sorulur. İlk 5 soru 10 puan, 5'den
-        10'a kadar 20 puan, 10'dan 20'ye kadar 30 puan, 20'den 30'a kadar 40
-        puan, 30'uncu sorudan itibaren de 50 puandır.
+        seçilir.Sorular kolaydan zora doğru sorulur. İlk 5 soru 1 puan, 5'den
+        10'a kadar 2 puan, 10'dan 20'ye kadar 3 puan, 20'den 30'a kadar 4
+        puan, 30'uncu sorudan itibaren de 5 puandır.
       </p>
       <p className="justify indent">
         Soruyu cevaplamak için 30 saniyeniz var. Her yarışmada 3 joker hakkınız
@@ -32,7 +32,7 @@ const HomePage = () => {
         başlamak için siteye üye olmanız gerekmektedir.
       </p>
       <div className="flex-container">
-        <Link to="/exam" className="button">
+        <Link to="/exam/all" className="button">
           Yarışmaya Başla
         </Link>
         </div>

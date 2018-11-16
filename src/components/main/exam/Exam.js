@@ -40,7 +40,7 @@ class Exam extends Component {
       date: ""
     },
     sessionEnd: false,
-    point: 10,
+    point: 1,
     user: {
       userName: "",
       totalPoint: 0,
@@ -112,10 +112,17 @@ class Exam extends Component {
       }
     };
 
+ 
     //starts Exam
-    const startExam = () => {
+    let topic=this.props.match.params.topic;
+    const startExam = () => {     
+      if(topic==="all"){
+        topic="^0";
+      }
+  
       let d = new Date();
       d.setHours(d.getHours() - 1);
+      d=d.toISOString();
       let lastSession = user.lastSession;
       this.setState(
         {
@@ -134,7 +141,8 @@ class Exam extends Component {
       );
 
       if (this.state.user.tryOuts > 0) {
-        fetchQuestion(this.state.point); //fetches exam questions
+
+        fetchQuestion(this.state.point,topic); //fetches exam questions
         return this.setState({
           ...this.state,
           sessionStart: true,
@@ -146,11 +154,11 @@ class Exam extends Component {
             joker3: true
           },
           user: {
-            ...this.user,
+            ...this.state.user,
             userName: user.userName,
             totalPoint: user.totalPoint,
             monthPoint: user.monthPoint,
-            lastSession: new Date(),
+            lastSession: new Date().toISOString(),
             signUpDate: user.signUpDate,
             city: user.city,
             id: user.id,
@@ -166,13 +174,13 @@ class Exam extends Component {
         case 5:
           return this.setState(
             {
-              point: 20,
+              point: 2,
               ordered: false,
               index: 0,
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point, () => {
+              fetchQuestion(this.state.point,topic, () => {
                 shuffle();
               });
             }
@@ -180,13 +188,13 @@ class Exam extends Component {
         case 10:
           return this.setState(
             {
-              point: 30,
+              point: 3,
               ordered: false,
               index: 0,
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point, () => {
+              fetchQuestion(this.state.point,topic, () => {
                 shuffle();
               });
             }
@@ -195,13 +203,13 @@ class Exam extends Component {
           return this.setState(
             {
               ...this.state,
-              point: 40,
+              point: 4,
               ordered: false,
               index: 0,
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point, () => {
+              fetchQuestion(this.state.point,topic, () => {
                 shuffle();
               });
             }
@@ -210,13 +218,13 @@ class Exam extends Component {
           return this.setState(
             {
               ...this.state,
-              point: 50,
+              point: 5,
               ordered: false,
               index: 0,
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point, () => {
+              fetchQuestion(this.state.point,topic, () => {
                 shuffle();
               });
             }
@@ -314,7 +322,7 @@ class Exam extends Component {
                   date: dateToday
                 },
                 questionCount: 0,
-                point: 10,
+                point: 1,
                 try: this.state.try - 1,
                 sessionEnd: true
               },
@@ -349,7 +357,7 @@ class Exam extends Component {
             id: question.id
           },
           questionCount: 0,
-          point: 10,
+          point: 1,
           session: {
             ...this.state.session,
             point: this.state.session.point,
@@ -453,7 +461,7 @@ class Exam extends Component {
       return <Redirect to="/" />;
     }
     if (this.state.sessionStart === false) {
-      return <StartExam startExam={startExam} user={user} />;
+      return <StartExam startExam={startExam} user={user}/>;
     }
     //loading
     if (loading && this.state.questionCount === 0)
@@ -523,7 +531,7 @@ const mapDispatchToProps = dispatch => {
   return {
     editExamQuestion: question => dispatch(editExamQuestion(question)),
     editUser: (user, token) => dispatch(editUser(user, token)),
-    fetchQuestion: question => dispatch(fetchQuestion(question))
+    fetchQuestion: (question,topic) => dispatch(fetchQuestion(question,topic))
   };
 };
 

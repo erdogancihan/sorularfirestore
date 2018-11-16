@@ -47,14 +47,16 @@ const AddQuestion = ({
               value={question.topic}
             >
               <option value="">Seçiniz</option>
-              <option value="tarih">Tarih</option>
-              <option value="matematik">Matematik</option>
-              <option value="fen">Fen</option>
-              <option value="din bilgisi">Din Bilgisi</option>
-              <option value="edebiyat">Edebiyat</option>
-              <option value="dünyadan">Dünyadan</option>
-              <option value="cografya">Coğrafya</option>
-              <option value="cografya">Coğrafya</option>
+              <option value="0tarih">Tarih</option>
+              <option value="0matematik">Matematik</option>
+              <option value="0fen">Fen</option>
+              <option value="0din bilgisi">Din Bilgisi</option>
+              <option value="0edebiyat">Edebiyat</option>
+              <option value="0dünyadan">Dünyadan</option>
+              <option value="0cografya">Coğrafya</option>
+              <option value="0ingilizce">İngilizce</option>
+              <option value="0almanca">Almanca</option>
+              <option value="0fransızca">Fransızca</option>
             </select>
           </div>
           <div className="form-group ">

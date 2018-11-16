@@ -6,21 +6,29 @@ import { login } from "../../../store/actions/loginActionsCreator";
 class LogIn extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    Error:""
   };
 
   componentDidUpdate() {
       if (this.props.session.id !== null) {
-      return this.props.history.goBack();
+      return this.props.history.push("/");
     }
   }
 
   render() {
     const {  login } = this.props;
-
+    
     const handleSubmit = e => {
       e.preventDefault();
       login(this.state);
+      if (this.props.session.id === null) {
+        this.setState({
+          ...this.state,
+          Error:<p className="center">Kullanıcı adı veya Parola hatalı.</p>
+        })
+      }
+     
     };
 
     const handleChange = e => {
@@ -66,8 +74,9 @@ class LogIn extends Component {
 
           <div className="flex-container">
             <button className="button">Giriş Yap</button>
+            
           </div>
-         
+          {this.state.Error}
         </form>
       </div>
     );

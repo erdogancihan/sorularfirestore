@@ -84,9 +84,9 @@ class AdminPanel extends Component {
       console.log(this.state.question);
       //it checks if edit button iss toggled. if it is not toggled it dispaches addQuestion action otherwise it dispatches editQuestion action.
       if (this.state.formControl.toggleEditButton === "0") {
-        this.props.addQuestion(this.state.question, session.session.id);
+        this.props.addQuestion(this.state.question, session.id);
       } else {
-        this.props.editQuestion(this.state.question, session.session.id);
+        this.props.editQuestion(this.state.question, session.id);
       }
       this.setState({
         question: {
@@ -113,7 +113,7 @@ class AdminPanel extends Component {
     //Deletes question
     const handleQuestionDelete = e => {
       console.log(this.state.question);
-      this.props.deleteQuestion(this.state.question, session.session.id);
+      this.props.deleteQuestion(this.state.question, session.id);
       //clears the state
       this.setState({
         question: {

@@ -1,7 +1,7 @@
 import React from "react";
 
-const StartExam  = ({ startExam,user }) => {
- 
+const StartExam  = ({ startExam,user}) => {
+ console.log("params start")
  
   return (
     <div className="container">

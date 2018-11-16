@@ -11,7 +11,7 @@ import {
   fetchSessionFailure
 } from "./userActions";
 
-let loopBack = "https://exam-e22e2.appspot.com/api/";
+let loopBack = "https://exam-e22e2.appspot.com/api";
 
 export function fetchUser(id, token) {
   return dispatch => {
