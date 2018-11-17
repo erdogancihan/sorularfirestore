@@ -72,7 +72,11 @@
 .dropdown-content a:hover {
   background-color: $primary-hover;
 }
+
 .dropdown:hover .dropdown-content {
+  display: block;
+}
+.drop{
   display: block;
 }
 

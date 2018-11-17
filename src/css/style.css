@@ -235,12 +235,17 @@ body {
   background-color: #ff3831;
 }
 
-/* line 75, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+/* line 76, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
 /* line 79, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
+.drop {
+  display: block;
+}
+
+/* line 83, C:/Users/erd/Desktop/web development/sorular/src/sass/_navbar.scss */
 .dropdown:hover .dropbtn {
   background-color: #EB6864;
 }

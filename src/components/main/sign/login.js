@@ -7,28 +7,30 @@ class LogIn extends Component {
   state = {
     email: "",
     password: "",
-    Error:""
+    Error: ""
   };
 
   componentDidUpdate() {
-      if (this.props.session.id !== null) {
+    if (this.props.session.id !== null) {
       return this.props.history.push("/");
     }
   }
 
   render() {
-    const {  login } = this.props;
-    
+    const { login } = this.props;
+
     const handleSubmit = e => {
       e.preventDefault();
       login(this.state);
-      if (this.props.session.id === null) {
-        this.setState({
-          ...this.state,
-          Error:<p className="center">Kullanıcı adı veya Parola hatalı.</p>
-        })
-      }
-     
+      
+      setTimeout(() => {
+        if (this.props.session.id === null) {
+          this.setState({
+            ...this.state,
+            Error: <p className="center">Kullanıcı adı veya Parola hatalı.</p>
+          });
+        }
+      }, 1000);
     };
 
     const handleChange = e => {
@@ -74,7 +76,6 @@ class LogIn extends Component {
 
           <div className="flex-container">
             <button className="button">Giriş Yap</button>
-            
           </div>
           {this.state.Error}
         </form>

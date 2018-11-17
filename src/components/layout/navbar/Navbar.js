@@ -10,13 +10,19 @@ import { fetchUser } from "../../../store/actions/userActionsCreator";
 
 class Navbar extends Component {
   state = {
-    session: ""
+    session: "",
+    toggleDrop:0
   };
 
   componentDidMount() {
     //if session id is null it dispatch setToken to get token from local storage
     if (this.props.session.id === null) {
       this.props.setToken();
+    }
+    if (this.props.session.id !== null) {
+      if (this.props.user === null) {
+        this.props.fetchUser(this.props.session.userId, this.props.session.id);
+      }
     }
   }
 
@@ -50,6 +56,25 @@ class Navbar extends Component {
         </React.Fragment>
       );
     }
+    const handleDropdown = () => {
+      const dropdownContent = document.getElementById("dropdownContent")  
+      if(this.state.toggleDrop===0) {
+        this.setState({
+          ...this.state,
+          toggleDrop:1
+        })
+        dropdownContent.setAttribute("class", "drop dropdown-content")
+      }  else{
+        this.setState({
+          ...this.state,
+          toggleDrop:0
+        })
+        dropdownContent.setAttribute("class", "dropdown-content")
+      }
+    
+  
+      
+    };
 
     return (
       <nav className="navbar">
@@ -61,8 +86,13 @@ class Navbar extends Component {
         </div>
         <ul className="nav ">
           <div className="dropdown">
-            <li className="nav-item nav-link dropbtn">Yarışma</li>
-            <div className="dropdown-content">
+            <li
+              className="nav-item nav-link dropbtn"
+              onClick={handleDropdown}
+            >
+              Yarışma
+            </li>
+            <div className="dropdown-content" id="dropdownContent">
               <Link to="/exam/all">Tümü</Link>
               <Link to="/exam/0matematik">Matematik</Link>
               <Link to="/exam/0tarih">Tarih</Link>

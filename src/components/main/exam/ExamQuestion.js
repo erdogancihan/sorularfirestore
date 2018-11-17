@@ -72,7 +72,6 @@ class Question extends Component {
     }
 
     if (joker.joker50) {
-      
       joker.joker50.map(answer => {
         switch (answer) {
           case "answer1":
@@ -91,7 +90,7 @@ class Question extends Component {
             return this.setState({
               answer4: " hidden"
             });
-            default:
+          default:
             return null;
         }
       });
@@ -174,7 +173,6 @@ class Question extends Component {
             break;
           default:
             return this.state;
-            
         }
       }
     };
@@ -185,10 +183,10 @@ class Question extends Component {
           this.timerID = setInterval(() => this.tick(), 1000);
           this.setState({
             timer: 30,
-            answer1: "button button-answer",
-            answer2: "button button-answer",
-            answer3: "button button-answer",
-            answer4: "button button-answer",
+            answer1: " button-answer",
+            answer2: " button-answer",
+            answer3: " button-answer",
+            answer4: " button-answer",
             disabled: false
           });
         }, 1000);
@@ -213,7 +211,7 @@ class Question extends Component {
             </span>
           </div>
           <div className="question-bar-item">
-           Puanınız: <span>{point}</span>
+            Puanınız: <span>{point}</span>
           </div>
         </div>
         <div className="question-text">{question.questionText}</div>

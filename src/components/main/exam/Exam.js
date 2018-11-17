@@ -15,59 +15,175 @@ import {
 } from "../../../store/actions/examActionsCreator";
 import {
   editUser,
-  addSession
+  addSession,
+  fetchUser
 } from "../../../store/actions/userActionsCreator";
 
 class Exam extends Component {
-  state = {
-    questions: [],
-    question: {
+  constructor(props){
+    super(props);
+    this.state = {
+      questions: [],
+      question: {
+        topic: "",
+        questionText: "",
+        answer1: "",
+        answer2: "",
+        answer3: "",
+        answer4: "",
+        correctAnswer: "",
+        point: "",
+        correctAnswerCount: 0,
+        timesAsked: 0,
+        id: ""
+      },
+      session: {
+        userId: "",
+        point: 0,
+        date: ""
+      },
+      sessionEnd: false,
+      point: 1,
+      user: {
+        userName: "",
+        totalPoint: 0,
+        monthPoint: 0,
+        lastSession: "",
+        signUpDate: "",
+        city: "",
+        id: "",
+        tryOuts: 0
+      },
+      joker: {
+        joker1: true,
+        joker2: true,
+        joker3: true,
+        timer: 0,
+        reset: false,
+        joker50: false
+      },
       topic: "",
-      questionText: "",
-      answer1: "",
-      answer2: "",
-      answer3: "",
-      answer4: "",
-      correctAnswer: "",
-      point: "",
-      correctAnswerCount: 0,
-      timesAsked: 0,
-      id: ""
-    },
-    session: {
-      userId: "",
-      point: 0,
-      date: ""
-    },
-    sessionEnd: false,
-    point: 1,
-    user: {
-      userName: "",
-      totalPoint: 0,
-      monthPoint: 0,
-      lastSession: "",
-      signUpDate: "",
-      city: "",
-      id: "",
-      tryOuts: 0
-    },
-    joker: {
-      joker1: true,
-      joker2: true,
-      joker3: true,
-      timer: 0,
-      reset: false,
-      joker50: false
-    },
-    questionCount: 0,
-    sessionStart: false,
-    buttonAnswer: "pressed",
-    buttonCorrect: "success",
-    buttonWrong: "warning",
-    ordered: false,
-    index: 0,
-    tryCount: 0
-  };
+      questionCount: 0,
+      sessionStart: false,
+      buttonAnswer: "pressed",
+      buttonCorrect: "success",
+      buttonWrong: "warning",
+      ordered: false,
+      index: 0,
+      tryCount: 0,
+      minute: 60
+    };
+  
+    this.resetTryOuts=this.resetTryOuts.bind(this);
+  }
+ 
+
+  resetTryOuts() {
+    //gets sytem time
+    let d = new Date();
+    if (this.props.user) {
+      let lastSession = new Date(this.props.user.lastSession);
+      const _MS_PER_DAY = 1000 * 60;
+      //Gets a and b date differences in hours.
+      // a and b are javascript Date objects
+      function dateDiffInDays(a, b) {
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(
+          a.getFullYear(),
+          a.getMonth(),
+          a.getDate(),
+          a.getHours(),
+          a.getMinutes()
+        );
+        const utc2 = Date.UTC(
+          b.getFullYear(),
+          b.getMonth(),
+          b.getDate(),
+          b.getHours(),
+          b.getMinutes()
+        );
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+      }
+      //two date's difference
+      let difference = dateDiffInDays(lastSession, d);
+      difference = Math.abs(difference - 60);
+      console.log(difference);
+
+      if (difference <= 60) {
+        this.setState(
+          {
+            ...this.state,
+            minute: difference
+          },
+          () => {
+            this.timerID = setInterval(() => this.tick(), 500);
+          }
+        );
+      } else {
+        console.log("difference");
+        this.setState(
+          {
+            ...this.state,
+            user: { ...this.state.user, tryOuts: 3 }
+          },
+          // console.log("id", this.state.user)
+          this.props.editUser(this.state.user, this.props.session.id)
+        );
+      }
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.session.userId === null) {
+      this.props.history.push("/");
+    }
+    this.resetTryOuts();
+    //sets the exam topic to state
+    this.setState(
+      {
+        ...this.state,
+        topic: this.props.match.params.topic
+      },
+      () => {
+        if (this.state.topic === "all") {
+          this.setState({
+            ...this.state,
+            topic: "^0"
+          });
+        }
+      }
+    );
+    
+  }
+
+  componentDidUpdate() {
+   
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    if (this.state.minute > 0) {
+      this.setState({
+        minute: this.state.minute - 1
+      });
+    } else {
+      if (this.props.user.tryOuts < 3) {
+        this.setState(
+          {
+            ...this.state,
+            user: { ...this.state.user, tryOuts: 3 },
+            minute: 60
+          },
+          () => {
+            this.props.editUser(this.state.user, this.props.session.id);
+            console.log(this.state.user);
+          }
+        );
+      }
+    }
+  }
 
   render() {
     const {
@@ -79,6 +195,30 @@ class Exam extends Component {
       user,
       session
     } = this.props;
+
+    //set state.user from props.uesr
+    if (this.state.user.userName === "") {
+      if (user) {
+        this.setState(
+          {
+            ...this.state,
+            user: {
+              userName: this.props.user.userName,
+              totalPoint: this.props.user.totalPoint,
+              monthPoint: this.props.user.monthPoint,
+              lastSession: this.props.user.lastSession,
+              signUpDate: this.props.user.signUpDate,
+              city: this.props.user.city,
+              id: this.props.user.id,
+              tryOuts: this.props.user.tryOuts
+            }
+          },
+          () => {
+            console.log(this.state.user);
+          }
+        );
+      }
+    }
 
     let question = examQuestions && examQuestions[this.state.index];
 
@@ -112,37 +252,11 @@ class Exam extends Component {
       }
     };
 
- 
     //starts Exam
-    let topic=this.props.match.params.topic;
-    const startExam = () => {     
-      if(topic==="all"){
-        topic="^0";
-      }
-  
-      let d = new Date();
-      d.setHours(d.getHours() - 1);
-      d=d.toISOString();
-      let lastSession = user.lastSession;
-      this.setState(
-        {
-          ...this.sate,
-          user: { ...this.state.user, tryOuts: user.tryOuts }
-        },
-        () => {
-          if (lastSession > d) {
-            this.setState({
-              ...this.sate,
-              user: { ...this.state.user, tryOuts: 3 }
-            });
-          }
-          console.log(this.state.user.tryOuts);
-        }
-      );
 
-      if (this.state.user.tryOuts > 0) {
-
-        fetchQuestion(this.state.point,topic); //fetches exam questions
+    const startExam = () => {
+      if (user.tryOuts > 0) {
+        fetchQuestion(this.state.point, this.state.topic); //fetches exam questions
         return this.setState({
           ...this.state,
           sessionStart: true,
@@ -162,7 +276,7 @@ class Exam extends Component {
             signUpDate: user.signUpDate,
             city: user.city,
             id: user.id,
-            tryOuts: this.state.user.tryOuts - 1
+            tryOuts: this.state.user.tryOuts
           }
         });
       }
@@ -180,7 +294,7 @@ class Exam extends Component {
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point,topic, () => {
+              fetchQuestion(this.state.point, this.state.topic, () => {
                 shuffle();
               });
             }
@@ -194,7 +308,7 @@ class Exam extends Component {
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point,topic, () => {
+              fetchQuestion(this.state.point, this.state.topic, () => {
                 shuffle();
               });
             }
@@ -209,7 +323,7 @@ class Exam extends Component {
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point,topic, () => {
+              fetchQuestion(this.state.point, this.state.topic, () => {
                 shuffle();
               });
             }
@@ -224,7 +338,7 @@ class Exam extends Component {
               questions: {}
             },
             () => {
-              fetchQuestion(this.state.point,topic, () => {
+              fetchQuestion(this.state.point, this.state.topic, () => {
                 shuffle();
               });
             }
@@ -321,13 +435,19 @@ class Exam extends Component {
                   userId: session.userId,
                   date: dateToday
                 },
+                user: {
+                  ...this.state.user,
+                  tryOuts: user.tryOuts - 1
+                },
                 questionCount: 0,
                 point: 1,
                 try: this.state.try - 1,
-                sessionEnd: true
+                sessionEnd: true,
+                minute:60
               },
               () => {
                 editExamQuestion(this.state.question);
+                editUser(this.state.user, session.id);
                 addSession(this.state.session, session.id);
               }
             );
@@ -358,6 +478,10 @@ class Exam extends Component {
           },
           questionCount: 0,
           point: 1,
+          user: {
+            ...this.state.user,
+            tryOuts: user.tryOuts - 1
+          },
           session: {
             ...this.state.session,
             point: this.state.session.point,
@@ -461,7 +585,13 @@ class Exam extends Component {
       return <Redirect to="/" />;
     }
     if (this.state.sessionStart === false) {
-      return <StartExam startExam={startExam} user={user}/>;
+      return (
+        <StartExam
+          startExam={startExam}
+          user={user}
+          minute={this.state.minute}
+        />
+      );
     }
     //loading
     if (loading && this.state.questionCount === 0)
@@ -503,6 +633,7 @@ class Exam extends Component {
             userPoint={this.state.session.point}
             tryCount={user.tryOuts}
             startExam={startExam}
+            minute={this.state.minute}
           />
           <Actions
             handleJoker50={handleJoker50}
@@ -531,7 +662,9 @@ const mapDispatchToProps = dispatch => {
   return {
     editExamQuestion: question => dispatch(editExamQuestion(question)),
     editUser: (user, token) => dispatch(editUser(user, token)),
-    fetchQuestion: (question,topic) => dispatch(fetchQuestion(question,topic))
+    fetchQuestion: (question, topic) =>
+      dispatch(fetchQuestion(question, topic)),
+    fetchUser: (user, token) => dispatch(fetchUser(user, token))
   };
 };
 

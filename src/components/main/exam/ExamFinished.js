@@ -1,6 +1,6 @@
 import React from "react";
 
-const ExamFinished = ({ userPoint, tryCount, startExam }) => {
+const ExamFinished = ({ userPoint, tryCount, startExam,minute }) => {
  
  let isDisabled=false;
   if (tryCount === 0) {
@@ -25,6 +25,7 @@ const ExamFinished = ({ userPoint, tryCount, startExam }) => {
         <h2 className="center">Üzgünüz Yarışma Bitti.</h2>
         <h2 className="center">Puanınınız:<span> {userPoint}</span></h2>
         <h4 className="center">Kalan Hakkınız {tryCount}</h4>
+        <p className="center">{"Yarışma hakkı "+ minute + " dakika sonra tekrar 3 olacaktır."}</p>
         <div className="flex-container">
           <button className="button"id="tryAgainButton" onClick={startExam} disabled={isDisabled}>
             Yeniden Dene

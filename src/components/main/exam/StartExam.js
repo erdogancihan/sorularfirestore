@@ -1,8 +1,15 @@
 import React from "react";
 
-const StartExam  = ({ startExam,user}) => {
- console.log("params start")
- 
+const StartExam = ({ startExam, user, minute }) => {
+  let resetTries = "";
+
+  if (user.tryOuts < 3)
+    resetTries = (
+      <p className="center">
+        {"Yarışma hakkı " + minute + " dakika sonra tekrar 3 olacaktır."}
+      </p>
+    );
+
   return (
     <div className="container">
       <div className="flex-container question-bar">
@@ -18,12 +25,12 @@ const StartExam  = ({ startExam,user}) => {
         </div>
       </div>
       <div>
-       
-       <h4 className="center">{"Yarışma Hakkınız: "+ user.tryOuts}</h4>
-       <p className="center">Yarışma hakkı 1 saat sonra tekrar 3 olacaktır.</p>
+        <h4 className="center">{"Yarışma Hakkınız: " + user.tryOuts}</h4>
+        {resetTries}
+
         <div className="flex-container">
-          <button className="button"id="startExamButton" onClick={startExam}>
-           HAZIR MISIN?
+          <button className="button" id="startExamButton" onClick={startExam}>
+            HAZIR MISIN?
           </button>
         </div>
       </div>
@@ -31,4 +38,4 @@ const StartExam  = ({ startExam,user}) => {
   );
 };
 
-export default StartExam ;
+export default StartExam;
