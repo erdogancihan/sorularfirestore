@@ -116,7 +116,7 @@ class Exam extends Component {
             minute: difference
           },
           () => {
-            this.timerID = setInterval(() => this.tick(), 500);
+            this.timerID = setInterval(() => this.tick(), 2000);
           }
         );
       } else {
@@ -126,8 +126,7 @@ class Exam extends Component {
             ...this.state,
             user: { ...this.state.user, tryOuts: 3 }
           },
-          // console.log("id", this.state.user)
-          this.props.editUser(this.state.user, this.props.session.id)
+        
         );
       }
     }
