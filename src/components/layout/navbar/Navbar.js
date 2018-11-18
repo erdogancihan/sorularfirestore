@@ -49,15 +49,23 @@ class Navbar extends Component {
       Links = <SignedOutLinks />;
     } else if (user !== null) {
       //logedin links are visible
-      Links = (
-        <React.Fragment>
-          <AdminLinks />
-          <SignedInLinks logout={handleLogout} user={user} />
-        </React.Fragment>
-      );
+      if (user.admin === true) {
+        Links = (
+          <React.Fragment>
+            <AdminLinks />
+            <SignedInLinks logout={handleLogout} user={user} />
+          </React.Fragment>
+        );
+      } else {
+        Links = (
+          <React.Fragment>
+            <SignedInLinks logout={handleLogout} user={user} />
+          </React.Fragment>
+        );
+      }
     }
     const handleDropdown = () => {
-    const dropdownContent = document.getElementById("dropdownContent");
+      const dropdownContent = document.getElementById("dropdownContent");
       if (this.state.toggleDrop === 0) {
         this.setState(
           {
@@ -91,17 +99,39 @@ class Navbar extends Component {
               Yarışma
             </li>
             <div className="dropdown-content" id="dropdownContent">
-              <Link to="/exam/all" onClick={handleDropdown}>Tümü</Link>
-              <Link to="/exam/0matematik" onClick={handleDropdown}>Matematik</Link>
-              <Link to="/exam/0tarih" onClick={handleDropdown}>Tarih</Link>
-              <Link to="/exam/0fen" onClick={handleDropdown}>Fen</Link>
-              <Link to="/exam/0din bilgisi" onClick={handleDropdown}>Din Bilgisi</Link>
-              <Link to="/exam/0edebiyat" onClick={handleDropdown}>Edebiyat</Link>
-              <Link to="/exam/0dünyadan" onClick={handleDropdown}>Dünyadan</Link>
-              <Link to="/exam/0cografya" onClick={handleDropdown}>Coğrafya</Link>
-              <Link to="/exam/0ingilizce" onClick={handleDropdown}>İngilizce</Link>
-              <Link to="/exam/0almanca" onClick={handleDropdown}>Almanca</Link>
-              <Link to="/exam/0fransızca" onClick={handleDropdown}>Fransızca</Link>
+              <Link to="/exam/all" onClick={handleDropdown}>
+                Tümü
+              </Link>
+              <Link to="/exam/0matematik" onClick={handleDropdown}>
+                Matematik
+              </Link>
+              <Link to="/exam/0tarih" onClick={handleDropdown}>
+                Tarih
+              </Link>
+              <Link to="/exam/0fen" onClick={handleDropdown}>
+                Fen
+              </Link>
+              <Link to="/exam/0din bilgisi" onClick={handleDropdown}>
+                Din Bilgisi
+              </Link>
+              <Link to="/exam/0edebiyat" onClick={handleDropdown}>
+                Edebiyat
+              </Link>
+              <Link to="/exam/0genel" onClick={handleDropdown}>
+                Genel Kültür
+              </Link>
+              <Link to="/exam/0cografya" onClick={handleDropdown}>
+                Coğrafya
+              </Link>
+              <Link to="/exam/1ingilizce" onClick={handleDropdown}>
+                İngilizce
+              </Link>
+              <Link to="/exam/1almanca" onClick={handleDropdown}>
+                Almanca
+              </Link>
+              <Link to="/exam/1fransızca" onClick={handleDropdown}>
+                Fransızca
+              </Link>
             </div>
           </div>
 

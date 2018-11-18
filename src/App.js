@@ -11,6 +11,7 @@ import HomePage from "./components/main/homePage/HomePage";
 
 class App extends Component {
   render() {
+   
     return (
       <BrowserRouter>
         <div className="App">

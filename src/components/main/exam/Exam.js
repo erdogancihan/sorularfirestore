@@ -20,7 +20,7 @@ import {
 } from "../../../store/actions/userActionsCreator";
 
 class Exam extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       questions: [],
@@ -52,7 +52,8 @@ class Exam extends Component {
         signUpDate: "",
         city: "",
         id: "",
-        tryOuts: 0
+        tryOuts: 0,
+        admin:false
       },
       joker: {
         joker1: true,
@@ -73,10 +74,9 @@ class Exam extends Component {
       tryCount: 0,
       minute: 60
     };
-  
-    this.resetTryOuts=this.resetTryOuts.bind(this);
+
+    this.resetTryOuts = this.resetTryOuts.bind(this);
   }
- 
 
   resetTryOuts() {
     //gets sytem time
@@ -120,13 +120,16 @@ class Exam extends Component {
           }
         );
       } else {
-        console.log("difference");
         this.setState(
           {
             ...this.state,
             user: { ...this.state.user, tryOuts: 3 }
           },
-        
+          () => {
+            console.log("difference");
+            console.log(this.state.user);
+            this.props.editUser(this.state.user, this.props.session.id);
+          }
         );
       }
     }
@@ -135,8 +138,10 @@ class Exam extends Component {
   componentDidMount() {
     if (this.props.session.userId === null) {
       this.props.history.push("/");
+    } else {
+      this.resetTryOuts();
     }
-    this.resetTryOuts();
+
     //sets the exam topic to state
     this.setState(
       {
@@ -152,12 +157,9 @@ class Exam extends Component {
         }
       }
     );
-    
   }
 
-  componentDidUpdate() {
-   
-  }
+  componentDidUpdate() {}
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -197,7 +199,7 @@ class Exam extends Component {
 
     //set state.user from props.uesr
     if (this.state.user.userName === "") {
-      if (user) {
+      if (user !== null) {
         this.setState(
           {
             ...this.state,
@@ -209,11 +211,15 @@ class Exam extends Component {
               signUpDate: this.props.user.signUpDate,
               city: this.props.user.city,
               id: this.props.user.id,
-              tryOuts: this.props.user.tryOuts
+              tryOuts: this.props.user.tryOuts,
+              admin:this.props.user.admin
             }
           },
           () => {
             console.log(this.state.user);
+            if (this.state.user.userName !== "") {
+              this.resetTryOuts();
+            }
           }
         );
       }
@@ -250,9 +256,15 @@ class Exam extends Component {
         }
       }
     };
-
+    /*
+    if (user!==null) {
+      if (user.tryOuts === 0) {
+        console.log(user)
+        this.resetTryOuts();
+      }
+    }
+*/
     //starts Exam
-
     const startExam = () => {
       if (user.tryOuts > 0) {
         fetchQuestion(this.state.point, this.state.topic); //fetches exam questions
@@ -442,7 +454,7 @@ class Exam extends Component {
                 point: 1,
                 try: this.state.try - 1,
                 sessionEnd: true,
-                minute:60
+                minute: 60
               },
               () => {
                 editExamQuestion(this.state.question);

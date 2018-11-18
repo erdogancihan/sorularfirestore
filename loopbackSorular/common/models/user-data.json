@@ -31,8 +31,12 @@
       "id": true
     },
     "tryOuts": {
-      "type": "number",
-      "id": true
+      "type": "number"
+    },
+    "admin": {
+      "type": "boolean",
+      "default": false
+      
     }
   },
   "validations": [],

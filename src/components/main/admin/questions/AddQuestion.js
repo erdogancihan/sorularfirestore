@@ -52,11 +52,11 @@ const AddQuestion = ({
               <option value="0fen">Fen</option>
               <option value="0din bilgisi">Din Bilgisi</option>
               <option value="0edebiyat">Edebiyat</option>
-              <option value="0dünyadan">Dünyadan</option>
+              <option value="0genel">Genel Kültür</option>
               <option value="0cografya">Coğrafya</option>
-              <option value="0ingilizce">İngilizce</option>
-              <option value="0almanca">Almanca</option>
-              <option value="0fransızca">Fransızca</option>
+              <option value="1ingilizce">İngilizce</option>
+              <option value="1almanca">Almanca</option>
+              <option value="1fransızca">Fransızca</option>
             </select>
           </div>
           <div className="form-group ">

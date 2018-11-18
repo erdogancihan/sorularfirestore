@@ -13,7 +13,8 @@ class signUp extends Component {
       totalPoint: 0,
       monthPoint: 0,
       lastSession: "",
-      tryOuts:3
+      tryOuts:3,
+      admin:false
     },
     email: "",
     password: "",

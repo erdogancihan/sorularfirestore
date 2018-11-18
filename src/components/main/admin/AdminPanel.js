@@ -10,7 +10,7 @@ import {
   editQuestion,
   deleteQuestion
 } from "../../../store/actions/questionActionCreator";
-import {fetchAllUsers} from "../../../store/actions/userActionsCreator";
+import { fetchAllUsers } from "../../../store/actions/userActionsCreator";
 import { setToken } from "../../../store/actions/loginActionsCreator";
 
 class AdminPanel extends Component {
@@ -46,7 +46,7 @@ class AdminPanel extends Component {
   }
 
   render() {
-    const { loading, questions, session,users } = this.props;
+    const { loading, questions, session, users,user } = this.props;
 
     //shows addQuestion/editquestion form
     const handleView = () => {
@@ -185,6 +185,7 @@ class AdminPanel extends Component {
     };
 
     if (session.id === null) return <Redirect to="/" />;
+   if (user.admin === false) return <Redirect to="/" />;
     if (loading) {
       return <div>Loading..</div>;
     }
@@ -212,7 +213,8 @@ const mapStateToProps = state => {
     loading: state.questions.loading,
     error: state.questions.error,
     session: state.session.session,
-    users:state.user.users
+    user:state.user.user,
+    users: state.user.users
   };
 };
 
@@ -225,7 +227,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(deleteQuestion(question, token)),
     fetchQuestions: (question, token) =>
       dispatch(fetchQuestions(question, token)),
-      fetchAllUsers:token=>dispatch(fetchAllUsers(token))
+    fetchAllUsers: token => dispatch(fetchAllUsers(token))
   };
 };
 
