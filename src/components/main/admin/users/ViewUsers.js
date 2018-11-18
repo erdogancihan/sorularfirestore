@@ -13,7 +13,7 @@ const ViewUsers = ({users}) => {
               <th>Üyelik Tarihi</th>
               <th>Aylık Puanı</th>
               <th>ToplamPuanı</th>
-              <th>Düzenle</th>
+              <th>Admin?</th>
               
             </tr>
           </thead>

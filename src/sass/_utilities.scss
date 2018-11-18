@@ -53,16 +53,15 @@ a{
 }
 
 
-.form-group{
-  
+.form-group{  
 display: flex;
 margin-bottom:1em;
 justify-content: space-between
 }
+ 
 label{
   min-width:130px;
   margin:0.3em;
-
 }
 input[type="email"]{
   font-family: 'Open Sans', sans-serif;

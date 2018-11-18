@@ -16,10 +16,10 @@ class Reports extends Component {
   }
 
   render() {
-    const {users, sessions}=this.props;
+    const {users,user, sessions}=this.props;
     return (
       <div>
-        <ReportsAll users={users} />
+        <ReportsAll users={users} activeUser={user} />
       </div>
     );
   }
@@ -28,7 +28,8 @@ class Reports extends Component {
 const mapStateToProps = state => {
   return {
     session: state.session.session,
-    users: state.user.users
+    users: state.user.users,
+    user:state.user.user
   };
 };
 

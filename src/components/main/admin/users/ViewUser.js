@@ -9,7 +9,7 @@ const ViewUser = ({user}) => {
       <td>{user.signUpDate}</td>
       <td>{user.monthPoint}</td>
       <td>{user.totalPoint}</td>
-      <td><button className="button">Düzenle</button></td>     
+      <td>{user.admin.toString()}</td>     
     </tr>
     </React.Fragment>
      

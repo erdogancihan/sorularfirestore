@@ -17,6 +17,10 @@ table {
     color:$dark;
   }
 
+  .activeUserClass{
+    background-color: $success !important;
+    color:$dark;
+  }
   table,
   th,
   td {
