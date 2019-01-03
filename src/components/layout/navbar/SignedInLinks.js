@@ -5,7 +5,7 @@ const SignedInLinks = ({ logout, user }) => {
   return (
     <React.Fragment>
       <Link to="/" className="nav-link ">
-        <li className="nav-item user-logo ">{user.user.userName}</li>
+        <li className="nav-item user-logo ">{user.userName}</li>
       </Link>
       <Link to="/" className="nav-link" onClick={logout}>
         <li className="nav-item">Çıkış</li>

@@ -1,0 +1,46 @@
+{
+  "name": "UserData",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": false
+  },
+  "properties": {
+    "userName": {
+      "type": "string"
+    },
+    "totalPoint": {
+      "type": "number",
+      "default": 0
+    },
+    "monthPoint": {
+      "type": "number",
+      "default": 0
+    },
+    "lastSession": {
+      "type": "string"
+    },
+    "signUpDate": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "id": true
+    },
+    "tryOuts": {
+      "type": "number"
+    },
+    "admin": {
+      "type": "boolean",
+      "default": false
+      
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { login } from "../../../store/actions/userActionsCreator";
+import { login } from "../../../store/actions/loginActionsCreator";
 
 class LogIn extends Component {
   state = {
-    user: {
-      email: "",
-      password: ""
-    },
+    email: "",
+    password: "",
     Error: ""
   };
 
   componentDidUpdate() {
-    if (this.props.user && this.props.user.id !== null) {
+    if (this.props.session.id !== null) {
       return this.props.history.push("/");
     }
   }
@@ -24,9 +22,9 @@ class LogIn extends Component {
     const handleSubmit = e => {
       e.preventDefault();
       login(this.state);
-
+      
       setTimeout(() => {
-        if (this.props.user.id === null) {
+        if (this.props.session.id === null) {
           this.setState({
             ...this.state,
             Error: <p className="center">Kullanıcı adı veya Parola hatalı.</p>
@@ -88,7 +86,7 @@ class LogIn extends Component {
 const mapStateToProps = state => {
   console.log("login state", state);
   return {
-    user: state.user.user
+    session: state.session.session
   };
 };
 const mapDispatchToProps = dispatch => {

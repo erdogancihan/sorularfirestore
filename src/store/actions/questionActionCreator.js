@@ -11,7 +11,6 @@ import {
   deleteQuestionFailure
 } from "./questionActions";
 
-//let loopBack = "http://localhost:3001/api";
 let loopBack = "https://exam-e22e2.appspot.com/api";
 
 export function fetchQuestions(token) {
@@ -48,7 +47,7 @@ export function addQuestion(question, token) {
 
 export function editQuestion(question, token) {
   let id = question.id;
-  console.log(token);
+  console.log(token)
   console.log("edit enter questions", id, question);
   return dispatch => {
     console.log("edit questiomn", question);

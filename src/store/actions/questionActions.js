@@ -1,3 +1,5 @@
+
+
 export const FETCH_QUESTIONS_BEGIN = "FETCH_QUESTIONS_BEGIN";
 export const FETCH_QUESTIONS_SUCCESS = "FETCH_QUESTIONS_SUCCESS";
 export const FETCH_QUESTIONS_FAILURE = "FETCH_QUESTIONS_FAILURE";
@@ -24,26 +26,29 @@ export const fetchQuestionsFailure = error => ({
 
 export const addQuestionSuccess = question => ({
   type: ADD_QUESTION_SUCCESS,
-  question
+  payload: { question }
 });
 export const addQuestionFailure = error => ({
   type: ADD_QUESTION_FAILURE,
-  error
+  payload: { error }
 });
 
 export const editQuestionSuccess = question => ({
   type: EDIT_QUESTION_SUCCESS,
-  question
+  payload: { question }
 });
 export const editQuestionFailure = error => ({
   type: EDIT_QUESTION_FAILURE,
-  error
+  payload: { error }
 });
 export const deleteQuestionSuccess = question => ({
   type: DELETE_QUESTION_SUCCESS,
-  question
+  payload: { question }
 });
 export const deleteQuestionFailure = error => ({
   type: DELETE_QUESTION_FAILURE,
-  error
+  payload: { error }
 });
+
+
+

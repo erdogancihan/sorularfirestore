@@ -5,39 +5,51 @@ import { connect } from "react-redux";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import AdminLinks from "./AdminLinks";
-import { setToken, logOut } from "../../../store/actions/userActionsCreator";
+import { setToken, logOut } from "../../../store/actions/loginActionsCreator";
+import { fetchUser } from "../../../store/actions/userActionsCreator";
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      session: "",
-      toggleDrop: 0
-    };
+  state = {
+    session: "",
+    toggleDrop: 0
+  };
+
+  componentDidMount() {
+    //if session id is null it dispatch setToken to get token from local storage
+    if (this.props.session.id === null) {
+      this.props.setToken();
+    }
+    if (this.props.session.id !== null) {
+      if (this.props.user === null) {
+        this.props.fetchUser(this.props.session.userId, this.props.session.id);
+      }
+    }
   }
 
-  componentWillMount() {
-    //if session id is null it dispatch setToken to get token from local storage
-      this.props.setToken();  
+  componentDidUpdate() {
+    //if session is active it fetches user information by userid
+    if (this.props.session.id !== null) {
+      if (this.props.user === null) {
+        this.props.fetchUser(this.props.session.userId, this.props.session.id);
+      }
+    }
   }
 
   render() {
-    const { user, logOut } = this.props;
+    const { session, user } = this.props;
     //logs out
     const handleLogout = e => {
       e.preventDefault();
-      console.log(user.id);
-      logOut(user.id);
+      this.props.logOut(session.id);
     };
 
     let Links;
-    //console.log(user);
     //logedout links are visible
-    if (!user || user.id === null) {
+    if (session.id === null) {
       Links = <SignedOutLinks />;
-    } else if (user.id !== null) {
+    } else if (user !== null) {
       //logedin links are visible
-      if (user.user.admin === true) {
+      if (user.admin === true) {
         Links = (
           <React.Fragment>
             <AdminLinks />
@@ -131,15 +143,16 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => {
-//  console.log(state);
   return {
+    session: state.session.session,
     user: state.user.user
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     setToken: () => dispatch(setToken()),
-    logOut: token => dispatch(logOut(token))
+    logOut: token => dispatch(logOut(token)),
+    fetchUser: (userId, id) => dispatch(fetchUser(userId, id))
   };
 };
 

@@ -63,7 +63,7 @@ const AddQuestion = ({
             <label htmlFor="puan">Soru Puanı Giriniz.(10 ve katları)</label>
             <input
               type="number"
-              step="1"
+              step="5"
               id="point"
               className="form-control"
               placeholder="Puan"

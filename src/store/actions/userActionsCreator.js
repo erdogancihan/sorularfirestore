@@ -1,136 +1,37 @@
 import axios from "axios";
 import {
-  signUpSuccess,
-  signUpFailure,
-  loginSuccess,
-  loginFailure,
-  logoutSuccess,
+  fetchUserSuccess,
+  fetchUserFailure,
   fetchAllUsersSuccess,
   fetchAllUsersFailure,
   editUserSuccess,
   editUserFailure,
   fetchSessionBegin,
   fetchSessionSuccess,
-  fetchSessionFailure,
- 
+  fetchSessionFailure
 } from "./userActions";
 
-//let loopBack = "http://localhost:3001/api";
 let loopBack = "https://exam-e22e2.appspot.com/api";
 
-export function signUp(user) {
-  let date = new Date().toISOString();
-  let email = user.email;
-  let password = user.password;
-  let userName = user.userName;
-  let city = user.city;
-  let signUpDate = date;
-  let totalPoint = 0;
-  let monthPoint = 0;
-  let lastSession = date;
-  let tryOuts = 3;
-  let admin = false;
-
-  let userData = {
-    email,
-    password,
-    userName,
-    city,
-    signUpDate,
-    totalPoint,
-    monthPoint,
-    lastSession,
-    tryOuts,
-    admin
-  };
-  //console.log(credentials);
+export function fetchUser(id, token) {
   return dispatch => {
-    console.log(userData);
-    axios
-      .request({
-        method: "post",
-        url: loopBack + "/userdata",
-        data: userData
-      })
+    return axios
+      .get(loopBack + "/UserData/" + id + "?access_token=" + token)
       .then(response => {
-        dispatch(login(userData));
-        return dispatch(signUpSuccess(response.data));
+        return dispatch(fetchUserSuccess(response.data));
       })
       .catch(error => {
-        console.log(error);
-        return dispatch(signUpFailure(error));
-      });
-  };
-}
-
-export function login(user) {
-  let credentials = {
-    email: user.email,
-    password: user.password
-  };
-  console.log(credentials);
-  return dispatch => {
-    axios
-      .request({
-        method: "post",
-        url: loopBack + "/userdata/login?include=user",
-        data: credentials
-      })
-      .then(response => {
-        console.log("login", response);
-        localStorage.setItem("id", response.data.id);
-        localStorage.setItem("userId", response.data.userId);
-        return dispatch(loginSuccess(response.data));
-      })
-      .catch(error => {
-        return dispatch(loginFailure(error));
-      });
-  };
-}
-
-export function logOut(token) {
-  return dispatch => {
-    axios
-      .request({
-        method: "post",
-        url: loopBack + "/userdata/logout?access_token=" + token
-      })
-      .then(response => {
-        console.log("logout response,", response);
-        localStorage.clear();
-        return dispatch(logoutSuccess());
-      })
-      .catch(() => {
-        console.log(token);
-        localStorage.clear();
-        return dispatch(logoutSuccess());
-      });
-  };
-}
-
-export function setToken() {
-  console.log("settokenn");
-  return dispatch => {
-    let id = localStorage.getItem("id");
-    let userId = localStorage.getItem("userId");
-    axios
-      .request({
-        method: "get",
-        url: loopBack + "/userdata/" + userId + "?access_token=" + id
-      })
-      .then(response => {
-        let signedInUser = { id: id, userId: userId, user: response.data };
-        return dispatch(loginSuccess(signedInUser));
+        dispatch(fetchUserFailure(error));
+        //Some error occurred
       });
   };
 }
 
 export function fetchAllUsers(token) {
-  console.log(token);
-  let filter = `[order]=totalPoint%20DESC&[access_token]=${token}`;
+  let filter = `[order]=totalPoint%20DESC&[access_token=${token}]`;
   return dispatch => {
     return axios
-      .get(loopBack + "/userdata?filter" + filter)
+      .get(loopBack + "/UserData?filter" + filter)
       .then(response => {
         return dispatch(fetchAllUsersSuccess(response.data));
       })
@@ -141,55 +42,44 @@ export function fetchAllUsers(token) {
   };
 }
 
-export function editUser(user) {
-  const token = user.id;
-  const userData = user.user;
-  //  console.log(userData);
+export function editUser(user, token) {
+  let id = user.id;
+  console.log(token);
+  console.log("edit user", id, user);
   return dispatch => {
- //   console.log("edit user", user);
+    console.log("edit user", user);
     axios
       .request({
-        method: "patch",
-        url: loopBack + "/userdata/" + userData.id + "?access_token=" + token,
-        data: userData
+        method: "put",
+        url: loopBack + "/UserData/" + id + "?access_token=" + token,
+        data: user
       })
       .then(response => {
-        let editUserdata = {
-          id: token,
-          userId: userData.id,
-          user: response.data
-        };
-     //   console.log(editUserdata);
-        return dispatch(editUserSuccess(editUserdata));
+        return dispatch(editUserSuccess(user));
       })
       .catch(error => {
-        console.log("edit user error", error);
+        console.log("edit user error", error, user);
         dispatch(editUserFailure(error));
       });
   };
 }
 
-export function addSession(point, user) {
-  const date = new Date()
-  const token = user.id;
-  const userId = user.user.id;
-  const sessionData = { userId, point, date };
-  
+export function addSession(session, token) {
   axios
     .request({
       method: "post",
       url: loopBack + "/sessions?access_token" + token,
-      data: sessionData
+      data: session
     })
     .then(response => {
       return console.log("session added", response.data);
-
     })
     .catch(error => {
       return console.log("session error", error);
     });
 }
 
+//2018-11-15T14:20:40.960Z
 export function fetchSession(date) {
   console.log(date);
   //date=10;

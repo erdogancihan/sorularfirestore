@@ -11,6 +11,7 @@ import {
   deleteQuestion
 } from "../../../store/actions/questionActionCreator";
 import { fetchAllUsers } from "../../../store/actions/userActionsCreator";
+import { setToken } from "../../../store/actions/loginActionsCreator";
 
 class AdminPanel extends Component {
   state = {
@@ -36,32 +37,36 @@ class AdminPanel extends Component {
     users: {}
   };
 
-  render() {
-    const { loading, questions, users, user } = this.props;
+  // fetches data from database when component mounts.
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.fetchQuestions(this.state, this.props.session.id);
+      this.props.fetchAllUsers(this.props.session.id);
+    }, 1500);
+  }
 
-    if (!users) {
-      if (user) {
-        console.log(this.props.user.id);
-        this.props.fetchAllUsers(this.props.user.id);
-        this.props.fetchQuestions(this.props.user.id);
-      }
-    }
+  render() {
+    const { loading, questions, session, users,user } = this.props;
 
     //shows addQuestion/editquestion form
     const handleView = () => {
       this.state.formControl.visible === "hidden"
         ? this.setState({
-            ...this.state,
             formControl: {
               ...this.state.formControl,
-              visible: "visible"
+              visible: "visible",
+              buttonText: "Gönder",
+              deleteButton: "remove",
+              toggleEditButton: "0"
             }
           })
         : this.setState({
-            ...this.state,
             formControl: {
               ...this.state.formControl,
-              visible: "hidden"
+              visible: "hidden",
+              buttonText: "Gönder",
+              deleteButton: "remove",
+              toggleEditButton: "0"
             }
           });
     };
@@ -69,7 +74,6 @@ class AdminPanel extends Component {
     //handle changes of form  inputs
     const handleChange = e => {
       this.setState({
-        ...this.state,
         question: { ...this.state.question, [e.target.id]: e.target.value }
       });
     };
@@ -80,12 +84,11 @@ class AdminPanel extends Component {
       console.log(this.state.question);
       //it checks if edit button iss toggled. if it is not toggled it dispaches addQuestion action otherwise it dispatches editQuestion action.
       if (this.state.formControl.toggleEditButton === "0") {
-        this.props.addQuestion(this.state.question, user.id);
+        this.props.addQuestion(this.state.question, session.id);
       } else {
-        this.props.editQuestion(this.state.question, user.id);
+        this.props.editQuestion(this.state.question, session.id);
       }
       this.setState({
-        ...this.state,
         question: {
           topic: "",
           point: 0,
@@ -99,17 +102,18 @@ class AdminPanel extends Component {
           timesAsked: "0"
         },
         formControl: {
-          ...this.state.formControl,
-          visible: "hidden",     
+          visible: "hidden",
+          buttonText: "Gönder",
+          deleteButton: "remove",
+          addQuestionButton: "visible button",
+          toggleEditButton: "0"
         }
       });
     };
-
-    
     //Deletes question
     const handleQuestionDelete = e => {
       console.log(this.state.question);
-      this.props.deleteQuestion(this.state.question, user.id);
+      this.props.deleteQuestion(this.state.question, session.id);
       //clears the state
       this.setState({
         question: {
@@ -180,8 +184,8 @@ class AdminPanel extends Component {
       }
     };
 
-    if (user && user.id === null) return <Redirect to="/" />;
-    if (user && user.user.admin === false) return <Redirect to="/" />;
+    if (session.id === null) return <Redirect to="/" />;
+   if (user.admin === false) return <Redirect to="/" />;
     if (loading) {
       return <div>Loading..</div>;
     }
@@ -208,13 +212,15 @@ const mapStateToProps = state => {
     questions: state.questions.questions,
     loading: state.questions.loading,
     error: state.questions.error,
-    user: state.user.user,
+    session: state.session.session,
+    user:state.user.user,
     users: state.user.users
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    setToken: () => dispatch(setToken()),
     addQuestion: (question, token) => dispatch(addQuestion(question, token)),
     editQuestion: (question, token) => dispatch(editQuestion(question, token)),
     deleteQuestion: (question, token) =>
