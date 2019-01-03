@@ -6,8 +6,11 @@ import ReportsAll from "./ReportsAll";
 import { fetchSession,fetchAllUsers } from "../../../store/actions/userActionsCreator";
 
 class Reports extends Component {
+  constructor(props){
+    super(props);
+  }
   componentWillMount() {
-    let token = this.props.session.id;
+    let token = this.props.user.id;
     let date = new Date();
     date.setMonth(date.getMonth()-1);
     date=date.toISOString();
@@ -16,18 +19,19 @@ class Reports extends Component {
   }
 
   render() {
-    const {users,user, sessions}=this.props;
+    const {users,user}=this.props;
     return (
       <div>
-        <ReportsAll users={users} activeUser={user} />
+        <ReportsAll users={users} activeUser={user.user} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    session: state.session.session,
+    session: state.user.session,
     users: state.user.users,
     user:state.user.user
   };

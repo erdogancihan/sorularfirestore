@@ -19,7 +19,7 @@ const HomePage = () => {
           10'a kadar 2 puan, 10'dan 20'ye kadar 3 puan, 20'den 30'a kadar 4
           puan, 30'uncu sorudan itibaren de 5 puandır.
         </p>
-        <p className="justify ">
+        <p className="justify">
           Soruyu cevaplamak için 30 saniyeniz var. Her yarışmada 3 joker
           hakkınız var. 50% jokeri ile yanlış iki şık elenir. Soruyu geç jokeri
           ile bir sonraki soruya geçebilirsiniz. Süre yetmezse süreyi uzat
@@ -28,7 +28,7 @@ const HomePage = () => {
         <p className="center ">
           Bir saatlik süre içerinde 3 kere yarışma hakkınız vardır.
         </p>
-        <hr/>
+    
         <p className="center">
           Yarışmaya başlamak için siteye üye olmanız gerekmektedir.
         </p>
@@ -43,7 +43,7 @@ const HomePage = () => {
 };
 const mapStateToProps = state => {
   return {
-    session: state.session.session
+    session: state.user.session
   };
 };
 export default connect(mapStateToProps)(HomePage);

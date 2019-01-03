@@ -2,23 +2,26 @@ import React from "react";
 import { Component } from "react";
 
 class Question extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      timer: 30,
+      answer1: " button-answer",
+      answer2: " button-answer",
+      answer3: " button-answer",
+      answer4: " button-answer",
+      disabled: false,
+      id: ""
+    };
+  }
   //to prevent setState call when component is unmounted
   _isMounted = false;
 
-  state = {
-    timer: 30,
-    answer1: " button-answer",
-    answer2: " button-answer",
-    answer3: " button-answer",
-    answer4: " button-answer",
-    disabled: false,
-    id: ""
-  };
 
   componentDidMount() {
     this._isMounted = true;
     this.timerID = setInterval(() => this.tick(), 1000);
-    this.props.shuffle();
+    //this.props.shuffle();
   }
 
   componentWillUnmount() {

@@ -1,6 +1,9 @@
 import {
-  FETCH_USER_SUCCESS,
-  FETCH_USER_FAILURE,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT,
   FETCH_ALLUSERS_SUCCESS,
   FETCH_ALLUSERS_FAILURE,
   EDIT_USER_SUCCESS,
@@ -12,43 +15,65 @@ import {
 const initialState = {
   user: null,
   loading: false,
-  error: null
+  error: null,
+  session: {
+    id: null,
+    userId: null
+  }
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USER_SUCCESS:
+    case SIGNUP_SUCCESS:
       return {
         ...state,
-        user: action.payload.user
+        error: null,
+        userSignedUp: action.user
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        userSignedUp: undefined
       };
 
-    case FETCH_USER_FAILURE:
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        error: user.payload.error
+        error: null,
+        user: action.user
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case LOGOUT:
+      return {
+        session: { id: null },
+        error: null
       };
     case FETCH_ALLUSERS_SUCCESS:
       return {
         ...state,
-        users: action.payload.user
+        users: action.users
       };
 
     case FETCH_ALLUSERS_FAILURE:
       return {
         ...state,
-        error: user.payload.error
+        error: action.error
       };
     case EDIT_USER_SUCCESS:
       return {
         ...state,
-        user: action.payload.user
+        user:action.user
       };
 
     case EDIT_USER_FAILURE:
       return {
         ...state,
-        error: user.payload.error
+        error: user.error
       };
 
     case FETCH_SESSION_BEGIN:

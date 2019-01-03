@@ -1,7 +1,8 @@
 import React from "react";
 import Report from "./Report";
 
-const ReportsAll = ({ users, activeUser, user }) => {
+const ReportsAll = ({ users, activeUser}) => {
+  console.log(activeUser)
   let activeUserIndex = 0;
   users &&
     users.map((user, index) => {
@@ -13,8 +14,8 @@ const ReportsAll = ({ users, activeUser, user }) => {
   if (activeUserIndex > 10) {
     return (activeUserReport = (
       <Report
-        key={user.id}
-        user={user}
+        key={activeUser.id}
+        user={activeUser}
         index={activeUserIndex}
         activeUser={"activeUserClass"}
       />

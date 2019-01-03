@@ -1,0 +1,26 @@
+{
+  "db": {
+    "name": "db",
+    "file": "db.json",
+    "connector": "memory"
+  },
+  "MyBlogEmail": {
+    "name": "MyBlogEmail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.ethereal.email",
+        "secure": false,
+        "port": 587,
+        "tls": {
+          "rejectUnauthorized": false
+        },
+        "auth": {
+          "user": "oxztbfcmiwjxxcqh@ethereal.email",
+          "pass": "hhhS7qxyWyZpXw8ceK"
+        }
+      }
+    ],
+    "connector": "mail"
+  }
+}

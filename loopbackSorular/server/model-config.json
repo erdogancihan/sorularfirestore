@@ -39,11 +39,11 @@
     "dataSource": "db",
     "public": true
   },
-  "UserData": {
+  "session": {
     "dataSource": "db",
     "public": true
   },
-  "session": {
+  "userdata": {
     "dataSource": "db",
     "public": true
   }

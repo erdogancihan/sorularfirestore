@@ -53,38 +53,38 @@ const questions = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        questions: [...state.questions, action.payload.question]
+        questions: [...state.questions, action.question]
       };
 
     case ADD_QUESTION_FAILURE:
       console.log("Question add error", action);
       return {
         ...state.questions,
-        error: action.payload.error,
+        error: action.error,
         questions: []
       };
 
     case EDIT_QUESTION_SUCCESS:
     let editedQuestions = state.questions.filter(question => {
-      return question.id !== action.payload.question.id;
+      return question.id !== action.question.id;
     });
     console.log(state);
     return {
       loading: false,
-      questions: [...editedQuestions, action.payload.question]
+      questions: [...editedQuestions, action.question]
     };
 
     case EDIT_QUESTION_FAILURE:
       console.log("Question editerror", action);
       return {
         ...state.questions,
-        error: action.payload.error,
+        error: action.error,
         questions: []
       };
 
     case DELETE_QUESTION_SUCCESS:
       let newQuestions = state.questions.filter(question => {
-        return question.id !== action.payload.question.id;
+        return question.id !== action.question.id;
       });
       console.log(state);
       return {
@@ -96,7 +96,7 @@ const questions = (state = initialState, action) => {
       console.log("Question delete error", action);
       return {
         ...state.questions,
-        error: action.payload.error,
+        error: action.error,
         questions: []
       };
 

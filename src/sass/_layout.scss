@@ -26,7 +26,18 @@ body {
 
 @media (max-width: 320px) {
 }
-@media (max-width: 360px) {
+@media (max-width: 420px) {
+  .question-bar{
+    width:100vw !important;
+    margin-left:-0.3em !important;
+    font-size:0.85em !important;   
+  }
+  .container {
+    margin: auto;
+    max-width: 700px;
+    padding: 0 0.3em;
+  
+   }
 }
 @media (max-width: 760px) {
 }

@@ -8,6 +8,7 @@ $primary-hover:#ff3831;
 $primary-light: #fcd9d8;
 $secondary: #aaa;
 $success: #22B24C;
+$activeUser:#f3ef0b;
 $info: #369;
 $warning: #ce4c82cc;
 $danger:#ff0800;
@@ -19,12 +20,9 @@ $question-bar:#44a9e4;
 
 
 .center{
-  text-align: center;
+  text-align: center !important;
 }
-.justifty{
-text-align: justify;
-text-justify: auto;
-}
+
 .indent{
   text-indent:2em;
 }

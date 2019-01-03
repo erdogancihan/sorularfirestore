@@ -3,7 +3,7 @@ import React from "react";
 const StartExam = ({ startExam, user, minute }) => {
   let resetTries = "";
 
-  if (user.tryOuts < 3)
+  if (user&&user.tryOuts < 3)
     resetTries = (
       <p className="center">
         {"Yarışma hakkı " + minute + " dakika sonra tekrar 3 olacaktır."}

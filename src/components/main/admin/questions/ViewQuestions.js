@@ -6,25 +6,34 @@ class ViewQuestions extends Component {
     topic: "",
     point: "",
     questions: this.props.questions,
-    filteredQuestions:this.props.questions,
+    filteredQuestions: this.props.questions,
     message: false
   };
+
+  componentDidUpdate(previousProps, previousState) {
+    //refreshes questions after addQuestion
+    if (previousProps.questions !== this.props.questions) {
+      this.setState({
+        ...this.state,
+        questions: this.props.questions
+      });
+    }
+  }
 
   render() {
     const { questions, handleQuestionEdit } = this.props;
 
+    //filters questions according to topics
     const filterListTopic = e => {
-      document.getElementById("selectPoint").selectedIndex="0";
+      document.getElementById("selectPoint").selectedIndex = "0";
       let updatedQuestions = questions;
       updatedQuestions = updatedQuestions.filter(question => {
         let questionTopic = question.topic;
-
         return questionTopic.indexOf(e.target.value) !== -1;
       });
-      console.log(updatedQuestions);
       this.setState({
         questions: updatedQuestions,
-        filteredQuestions:updatedQuestions
+        filteredQuestions: updatedQuestions
       });
       if (updatedQuestions == 0) {
         this.setState({
@@ -37,15 +46,15 @@ class ViewQuestions extends Component {
           message: false
         });
       }
-      console.log(this.state);
     };
+
+    //filters questions according to points
     const filterListPoint = e => {
       let updatedQuestions = this.state.filteredQuestions;
       updatedQuestions = updatedQuestions.filter(question => {
         let questionPoint = question.point.toString();
         return questionPoint.indexOf(e.target.value) !== -1;
       });
-      console.log(updatedQuestions);
       this.setState({
         questions: updatedQuestions
       });
@@ -60,19 +69,8 @@ class ViewQuestions extends Component {
           message: false
         });
       }
-      console.log(this.state);
     };
 
-    /* {questions &&
-              questions.map(question => {
-                return (
-                  <ViewQuestion
-                    key={question.id}
-                    question={question}
-                    handleQuestionEdit={handleQuestionEdit}
-                  />
-                );
-              })}*/
     return (
       <div className="container  ">
         <div className="table">
@@ -99,7 +97,7 @@ class ViewQuestions extends Component {
                     <option value="1fransızca">Fransızca</option>
                   </select>
                 </th>
-                <th />
+                <th>{"Toplam :" + this.state.questions.length}</th>
                 <th>
                   <select
                     className="search2"
