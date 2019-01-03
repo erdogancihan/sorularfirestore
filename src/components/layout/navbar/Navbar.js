@@ -1,65 +1,73 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import AdminLinks from "./AdminLinks";
-import { setToken, logOut } from "../../../store/actions/loginActionsCreator";
-import { fetchUser } from "../../../store/actions/userActionsCreator";
+import { logOut } from "../../../store/actions/userActionsCreator";
 
 class Navbar extends Component {
-  state = {
-    session: "",
-    toggleDrop: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      session: "",
+      toggleDrop: 0
+    };
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+  componentDidMount() {
+    const { firestore, firebase, FirebaseAuth } = this.context.store;
+    const auth = this.props.auth;
+    const authListener = firebase.auth();
+
+    authListener.onAuthStateChanged(function(user) {
+      if (user) {
+        // alert(user.uid, user.emailVerified.toString());
+        if (auth.uid && auth.emailVerified === true) {
+          firestore.onSnapshot({
+            collection: "users",
+            doc: auth.uid,
+            storeAs: "user"
+          });
+        }
+      }
+    });
+  }
+
+  //logs out
+  handleLogout = e => {
+    e.preventDefault();
+    this.props.logOut();
   };
 
-  componentDidMount() {
-    //if session id is null it dispatch setToken to get token from local storage
-    if (this.props.session.id === null) {
-      this.props.setToken();
-    }
-    if (this.props.session.id !== null) {
-      if (this.props.user === null) {
-        this.props.fetchUser(this.props.session.userId, this.props.session.id);
-      }
-    }
-  }
-
-  componentDidUpdate() {
-    //if session is active it fetches user information by userid
-    if (this.props.session.id !== null) {
-      if (this.props.user === null) {
-        this.props.fetchUser(this.props.session.userId, this.props.session.id);
-      }
-    }
-  }
-
   render() {
-    const { session, user } = this.props;
-    //logs out
-    const handleLogout = e => {
-      e.preventDefault();
-      this.props.logOut(session.id);
-    };
+    const { user, auth } = this.props;
+
+    console.log(this.props);
 
     let Links;
+    //console.log(user);
     //logedout links are visible
-    if (session.id === null) {
+    if (!auth.uid) {
       Links = <SignedOutLinks />;
-    } else if (user !== null) {
+    } else {
       //logedin links are visible
-      if (user.admin === true) {
+      if (user && user.admin === true) {
         Links = (
           <React.Fragment>
             <AdminLinks />
-            <SignedInLinks logout={handleLogout} user={user} />
+            <SignedInLinks logout={this.handleLogout} user={user} />
           </React.Fragment>
         );
-      } else {
+      } else if (user && user.admin === false) {
         Links = (
           <React.Fragment>
-            <SignedInLinks logout={handleLogout} user={user} />
+            <SignedInLinks logout={this.handleLogout} user={user} />
           </React.Fragment>
         );
       }
@@ -143,16 +151,15 @@ class Navbar extends Component {
 }
 
 const mapStateToProps = state => {
+  // console.log(state);
   return {
-    session: state.session.session,
-    user: state.user.user
+    auth: state.firebase.auth,
+    user: state.firestore.data.user
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    setToken: () => dispatch(setToken()),
-    logOut: token => dispatch(logOut(token)),
-    fetchUser: (userId, id) => dispatch(fetchUser(userId, id))
+    logOut: () => dispatch(logOut())
   };
 };
 

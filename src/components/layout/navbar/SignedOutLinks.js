@@ -7,9 +7,6 @@ const SignedOutLinks = () => {
       <Link to="/login" className="nav-link">
         <li className="nav-item">Giriş Yap</li>
       </Link>
-      <Link to="/signup" className="nav-link">
-        <li className="nav-item">Üye ol</li>
-      </Link>
     </React.Fragment>
   );
 };

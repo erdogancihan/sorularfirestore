@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import ReportsMonth from "./ReportsMonth";
 import ReportsAll from "./ReportsAll";
-import { fetchSession,fetchAllUsers } from "../../../store/actions/userActionsCreator";
+import { fetchAllUsers } from "../../../store/actions/userActionsCreator";
 
 class Reports extends Component {
+  constructor(props){
+    super(props);
+  }
   componentWillMount() {
-    let token = this.props.session.id;
+    let token = this.props.user.id;
     let date = new Date();
     date.setMonth(date.getMonth()-1);
     date=date.toISOString();
@@ -16,7 +18,7 @@ class Reports extends Component {
   }
 
   render() {
-    const {users,user, sessions}=this.props;
+    const {users,user}=this.props;
     return (
       <div>
         <ReportsAll users={users} activeUser={user} />
@@ -26,16 +28,16 @@ class Reports extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    session: state.session.session,
-    users: state.user.users,
-    user:state.user.user
+    session: state.users.session,
+    users: state.firestore.ordered.users,
+    user:state.firestore.data.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSession: (date) => dispatch(fetchSession(date)),
     fetchAllUsers:(token) =>dispatch(fetchAllUsers(token))
   };
 };

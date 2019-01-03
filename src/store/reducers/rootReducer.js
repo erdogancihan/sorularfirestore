@@ -1,13 +1,14 @@
 import { combineReducers } from "redux";
-import questions from "./questions";
 import exams from "./exams"
-import session from "./session"
-import user from "./user"
+import users from "./user"
+import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer= combineReducers({
-  questions,
+ 
   exams,
-  session,
-  user
+  users,
+  firestore: firestoreReducer,
+  firebase: firebaseReducer
 });
 export default rootReducer;

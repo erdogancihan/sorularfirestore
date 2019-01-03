@@ -7,7 +7,7 @@ const ViewQuestion = ({question, handleQuestionEdit}) => {
       <td className="tooltip"><span className="tooltiptext">{question.questionText}</span>{(question.topic).substr(1)}</td>
       <td>{question.timesAsked}</td>
       <td>{question.point}</td>
-      <td>{question.correctAnswerCount} %</td>
+      <td>{Math.floor( question.correctAnswerCount/question.timesAsked*100)} %</td>
       <td><button className="button" onClick={()=>{handleQuestionEdit(question.id)}}>Düzenle</button></td>     
     </tr>
     </React.Fragment>

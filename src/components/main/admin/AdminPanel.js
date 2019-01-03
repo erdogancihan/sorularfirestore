@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import AdminQuestions from "./questions/AdminQuestions";
 import Users from "./users/Users";
@@ -11,83 +12,153 @@ import {
   deleteQuestion
 } from "../../../store/actions/questionActionCreator";
 import { fetchAllUsers } from "../../../store/actions/userActionsCreator";
-import { setToken } from "../../../store/actions/loginActionsCreator";
 
 class AdminPanel extends Component {
-  state = {
-    question: {
-      topic: "",
-      point: 0,
-      questionText: "",
-      answer1: "",
-      answer2: "",
-      answer3: "",
-      answer4: "",
-      correctAnswer: "",
-      correctAnswerRatio: "100",
-      timesAsked: "0"
-    },
-    formControl: {
-      visible: "hidden",
-      buttonText: "Gönder",
-      deleteButton: "remove button",
-      addQuestionButton: "visible button",
-      toggleEditButton: "0"
-    },
-    users: {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      question: {
+        topic: "",
+        point: 0,
+        questionText: "",
+        answer1: "",
+        answer2: "",
+        answer3: "",
+        answer4: "",
+        correctAnswer: "",
+        correctAnswerRatio: "100",
+        timesAsked: "0"
+      },
+      formControl: {
+        visible: "hidden",
+        buttonText: "Gönder",
+        deleteButton: "remove button",
+        addQuestionButton: "visible button",
+        toggleEditButton: "0"
+      },
+      users: {}
+    };
+  }
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+    
   };
-
-  // fetches data from database when component mounts.
   componentDidMount() {
-    setTimeout(() => {
-      this.props.fetchQuestions(this.state, this.props.session.id);
-      this.props.fetchAllUsers(this.props.session.id);
-    }, 1500);
+    this.props.fetchAllUsers();
+    this.props.fetchQuestions();
+    const { firestore} = this.context.store;
+    firestore.onSnapshot({collection:"questions"});
+          
   }
 
-  render() {
-    const { loading, questions, session, users,user } = this.props;
+  //shows addQuestion/editquestion form
+  handleView = () => {
+    this.state.formControl.visible === "hidden"
+      ? this.setState({
+          ...this.state,
+          formControl: {
+            ...this.state.formControl,
+            visible: "visible"
+          }
+        })
+      : this.setState({
+          ...this.state,
+          formControl: {
+            ...this.state.formControl,
+            visible: "hidden"
+          }
+        });
+  };
 
-    //shows addQuestion/editquestion form
-    const handleView = () => {
-      this.state.formControl.visible === "hidden"
-        ? this.setState({
-            formControl: {
-              ...this.state.formControl,
-              visible: "visible",
-              buttonText: "Gönder",
-              deleteButton: "remove",
-              toggleEditButton: "0"
-            }
-          })
-        : this.setState({
-            formControl: {
-              ...this.state.formControl,
-              visible: "hidden",
-              buttonText: "Gönder",
-              deleteButton: "remove",
-              toggleEditButton: "0"
-            }
-          });
-    };
+  //handle changes of form  inputs
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      question: { ...this.state.question, [e.target.id]: e.target.value }
+    });
+  };
 
-    //handle changes of form  inputs
-    const handleChange = e => {
-      this.setState({
-        question: { ...this.state.question, [e.target.id]: e.target.value }
-      });
-    };
-
-    //Submits a newquestion or edits a question
-    const handleSubmit = e => {
-      e.preventDefault();
-      console.log(this.state.question);
-      //it checks if edit button iss toggled. if it is not toggled it dispaches addQuestion action otherwise it dispatches editQuestion action.
-      if (this.state.formControl.toggleEditButton === "0") {
-        this.props.addQuestion(this.state.question, session.id);
-      } else {
-        this.props.editQuestion(this.state.question, session.id);
+  //Submits a newquestion or edits a question
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.question);
+    //it checks if edit button iss toggled. if it is not toggled it dispaches addQuestion action otherwise it dispatches editQuestion action.
+    if (this.state.formControl.toggleEditButton === "0") {
+      this.props.addQuestion(this.state.question);
+    } else {
+      this.props.editQuestion(this.state.question);
+    }
+    this.setState({
+      ...this.state,
+      question: {
+        topic: "",
+        point: 0,
+        questionText: "",
+        answer1: "",
+        answer2: "",
+        answer3: "",
+        answer4: "",
+        correctAnswer: "",
+        correctAnswerRatio: "100",
+        timesAsked: "0"
+      },
+      formControl: {
+        ...this.state.formControl,
+        visible: "hidden"
       }
+    });
+  };
+
+  //Deletes question
+  handleQuestionDelete = e => {
+    console.log(this.state.question);
+    this.props.deleteQuestion(this.state.question);
+    //clears the state
+    this.setState({
+      question: {
+        topic: "",
+        point: 0,
+        questionText: "",
+        answer1: "",
+        answer2: "",
+        answer3: "",
+        answer4: "",
+        correctAnswer: "",
+        correctAnswerCount: 0,
+        timesAsked: 0
+      },
+      //makes form unvisible
+      formControl: {
+        visible: "hidden",
+        buttonText: "Gönder",
+        deleteButton: "remove",
+        addQuestionButton: "visible button",
+        toggleEditButton: "0"
+      }
+    });
+  };
+
+  //shows form and fills form with the selected question's values.
+  handleQuestionEdit = e => {
+    //shows edit question form
+    let filter = this.props.questions.filter(question => {
+      return question.id === e;
+    });
+    console.log(this.state);
+    //Toggles edit button
+    if (this.state.formControl.toggleEditButton === "0") {
+      this.setState({
+        question: filter[0],
+        formControl: {
+          visible: "visible ",
+          buttonText: "Düzenle",
+          deleteButton: "visible button",
+          addQuestionButton: "remove button",
+          toggleEditButton: "1"
+        }
+      });
+    } else {
+      //clears values when edit button untoggles
       this.setState({
         question: {
           topic: "",
@@ -109,99 +180,44 @@ class AdminPanel extends Component {
           toggleEditButton: "0"
         }
       });
-    };
-    //Deletes question
-    const handleQuestionDelete = e => {
-      console.log(this.state.question);
-      this.props.deleteQuestion(this.state.question, session.id);
-      //clears the state
-      this.setState({
-        question: {
-          topic: "",
-          point: 0,
-          questionText: "",
-          answer1: "",
-          answer2: "",
-          answer3: "",
-          answer4: "",
-          correctAnswer: "",
-          correctAnswerCount: 0,
-          timesAsked: 0
-        },
-        //makes form unvisible
-        formControl: {
-          visible: "hidden",
-          buttonText: "Gönder",
-          deleteButton: "remove",
-          addQuestionButton: "visible button",
-          toggleEditButton: "0"
-        }
-      });
-    };
-
-    //shows form and fills form with the selected question's values.
-    const handleQuestionEdit = e => {
-      //shows edit question form
-      let filter = questions.filter(question => {
-        return question.id === e;
-      });
-      console.log(this.state);
-      //Toggles edit button
-      if (this.state.formControl.toggleEditButton === "0") {
-        this.setState({
-          question: filter[0],
-          formControl: {
-            visible: "visible ",
-            buttonText: "Düzenle",
-            deleteButton: "visible button",
-            addQuestionButton: "remove button",
-            toggleEditButton: "1"
-          }
-        });
-      } else {
-        //clears values when edit button untoggles
-        this.setState({
-          question: {
-            topic: "",
-            point: 0,
-            questionText: "",
-            answer1: "",
-            answer2: "",
-            answer3: "",
-            answer4: "",
-            correctAnswer: "",
-            correctAnswerRatio: "100",
-            timesAsked: "0"
-          },
-          formControl: {
-            visible: "hidden",
-            buttonText: "Gönder",
-            deleteButton: "remove",
-            addQuestionButton: "visible button",
-            toggleEditButton: "0"
-          }
-        });
-      }
-    };
-
-    if (session.id === null) return <Redirect to="/" />;
-   if (user.admin === false) return <Redirect to="/" />;
-    if (loading) {
-      return <div>Loading..</div>;
     }
-    return (
-      <div className="flex-container">
+  };
+  
+  Questions = () => {
+    console.log(this.props)
+    if (this.props.questions) {
+      return (
         <AdminQuestions
           formControl={this.state.formControl}
-          handleChange={handleChange}
-          handleView={handleView}
-          handleSubmit={handleSubmit}
-          handleQuestionEdit={handleQuestionEdit}
-          handleQuestionDelete={handleQuestionDelete}
-          questions={questions}
+          handleChange={this.handleChange}
+          handleView={this.handleView}
+          handleSubmit={this.handleSubmit}
+          handleQuestionEdit={this.handleQuestionEdit}
+          handleQuestionDelete={this.handleQuestionDelete}
+          questions={this.props.questions}
           question={this.state.question}
         />
-        <Users users={users} />
+      );
+    } else {
+      return <div>loading</div>;
+    }
+  };
+  Users = () => {
+    if (this.props.users) {
+      return <Users users={this.props.users} />;
+    } else {
+      return <div>loading</div>;
+    }
+  };
+  render() {
+    const { user } = this.props;
+
+    if (user && user.admin === false) return <Redirect to="/" />;
+
+    return (
+      <div className="flex-container">
+        <this.Questions/>
+        <this.Users/>
       </div>
     );
   }
@@ -209,25 +225,21 @@ class AdminPanel extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    questions: state.questions.questions,
-    loading: state.questions.loading,
-    error: state.questions.error,
-    session: state.session.session,
-    user:state.user.user,
-    users: state.user.users
+    questions: state.firestore.ordered.questions,
+    user: state.firestore.data.user,
+    users: state.firestore.ordered.users
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    setToken: () => dispatch(setToken()),
     addQuestion: (question, token) => dispatch(addQuestion(question, token)),
     editQuestion: (question, token) => dispatch(editQuestion(question, token)),
     deleteQuestion: (question, token) =>
       dispatch(deleteQuestion(question, token)),
     fetchQuestions: (question, token) =>
       dispatch(fetchQuestions(question, token)),
-    fetchAllUsers: token => dispatch(fetchAllUsers(token))
+    fetchAllUsers: token => dispatch(fetchAllUsers(token)) 
   };
 };
 

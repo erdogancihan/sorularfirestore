@@ -1,84 +1,62 @@
-import axios from "axios";
-import {
-  fetchQuestionsBegin,
-  fetchQuestionsSuccess,
-  fetchQuestionsFailure,
-  addQuestionSuccess,
-  addQuestionFailure,
-  editQuestionSuccess,
-  editQuestionFailure,
-  deleteQuestionSuccess,
-  deleteQuestionFailure
-} from "./questionActions";
 
-let loopBack = "https://exam-e22e2.appspot.com/api";
-
-export function fetchQuestions(token) {
-  return dispatch => {
-    dispatch(fetchQuestionsBegin());
-    return axios
-      .get(loopBack + "/questions?access_token" + token)
-      .then(response => {
-        return dispatch(fetchQuestionsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchQuestionsFailure(error));
-        //Some error occurred
-      });
-  };
-}
-export function addQuestion(question, token) {
-  return dispatch => {
-    axios
-      .request({
-        method: "post",
-        url: loopBack + "/questions?access_token" + token,
-        data: question
+export function fetchQuestions() {
+  return (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    fireStore
+      .get({
+        collection: "questions"
       })
       .then(response => {
-        return dispatch(addQuestionSuccess(response.data));
+        return console.log(response);
       })
       .catch(error => {
-        dispatch(addQuestionFailure(error));
-        //Some error occurred
+        return console.log(error);
       });
   };
 }
 
-export function editQuestion(question, token) {
-  let id = question.id;
-  console.log(token)
-  console.log("edit enter questions", id, question);
-  return dispatch => {
-    console.log("edit questiomn", question);
-    axios
-      .request({
-        method: "put",
-        url: loopBack + "/questions/" + id + "?access_token=" + token,
-        data: question
-      })
+export const addQuestion = question => { 
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    console.log(question);
+    firestore
+      .collection("questions")
+      .add(question)
       .then(response => {
-        return dispatch(editQuestionSuccess(question));
+        console.log(response);
       })
       .catch(error => {
-        console.log("edit questioms error", error, question);
-        dispatch(editQuestionFailure(error));
-        //Some error occurred
+        console.log(error);
+      });
+  };
+};
+
+export function editQuestion(question) {
+  console.log(question)
+  return (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+
+    fireStore
+      .update({ collection: "questions", doc: question.id }, question)
+      .then(resp => {
+        return console.log("edited");
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 }
 
-export function deleteQuestion(question, token) {
-  let id = question.id;
-  return dispatch => {
-    axios
-      .delete(loopBack + "/questions/" + id + "?access_token=" + token)
-      .then(response => {
-        return dispatch(deleteQuestionSuccess(question));
+export function deleteQuestion(question) {
+  return (dispatch, getState, { getFirestore }) => {
+    const fireStore = getFirestore();
+    fireStore
+      .delete({ collection: "questions", doc: question.id })
+      .then(resp => {
+        return console.log(resp);
       })
       .catch(error => {
-        dispatch(deleteQuestionFailure(error));
-        //Some error occurred
+        console.log(error);
       });
   };
 }

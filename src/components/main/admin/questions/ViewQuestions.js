@@ -2,77 +2,84 @@ import React, { Component } from "react";
 import ViewQuestion from "./ViewQuestion";
 
 class ViewQuestions extends Component {
-  state = {
-    topic: "",
-    point: "",
-    questions: this.props.questions,
-    filteredQuestions:this.props.questions,
-    message: false
+  constructor(props){
+    super(props)
+    this.state = {
+      topic: "",
+      point: "",
+      questions:"",
+      filteredQuestions: "",
+      message: false
+    };
+  
+  }
+  componentWillMount(){
+    this.setState({
+      ...this.state,
+      questions: this.props.questions,
+      filteredQuestions: this.props.questions,
+    })
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    //refreshes questions after addQuestion
+    if (previousProps.questions !== this.props.questions) {
+      this.setState({
+        ...this.state,
+        questions: this.props.questions
+      });
+    }
+  }
+
+  //filters questions according to topics
+  filterListTopic = e => {
+    document.getElementById("selectPoint").selectedIndex = "0";
+    let updatedQuestions = this.props.questions;
+    updatedQuestions = updatedQuestions.filter(question => {
+      let questionTopic = question.topic;
+      return questionTopic.indexOf(e.target.value) !== -1;
+    });
+    this.setState({
+      questions: updatedQuestions,
+      filteredQuestions: updatedQuestions
+    });
+    if (updatedQuestions == 0) {
+      this.setState({
+        topic: e.target.value,
+        message: true
+      });
+    } else {
+      this.setState({
+        topic: e.target.value,
+        message: false
+      });
+    }
   };
 
+  //filters questions according to points
+  filterListPoint = e => {
+    let updatedQuestions = this.state.filteredQuestions;
+    updatedQuestions = updatedQuestions.filter(question => {
+      let questionPoint = question.point.toString();
+      return questionPoint.indexOf(e.target.value) !== -1;
+    });
+    this.setState({
+      questions: updatedQuestions
+    });
+    if (updatedQuestions == 0) {
+      this.setState({
+        point: e.target.value,
+        message: true
+      });
+    } else {
+      this.setState({
+        point: e.target.value,
+        message: false
+      });
+    }
+  };
   render() {
     const { questions, handleQuestionEdit } = this.props;
-
-    const filterListTopic = e => {
-      document.getElementById("selectPoint").selectedIndex="0";
-      let updatedQuestions = questions;
-      updatedQuestions = updatedQuestions.filter(question => {
-        let questionTopic = question.topic;
-
-        return questionTopic.indexOf(e.target.value) !== -1;
-      });
-      console.log(updatedQuestions);
-      this.setState({
-        questions: updatedQuestions,
-        filteredQuestions:updatedQuestions
-      });
-      if (updatedQuestions == 0) {
-        this.setState({
-          topic: e.target.value,
-          message: true
-        });
-      } else {
-        this.setState({
-          topic: e.target.value,
-          message: false
-        });
-      }
-      console.log(this.state);
-    };
-    const filterListPoint = e => {
-      let updatedQuestions = this.state.filteredQuestions;
-      updatedQuestions = updatedQuestions.filter(question => {
-        let questionPoint = question.point.toString();
-        return questionPoint.indexOf(e.target.value) !== -1;
-      });
-      console.log(updatedQuestions);
-      this.setState({
-        questions: updatedQuestions
-      });
-      if (updatedQuestions == 0) {
-        this.setState({
-          point: e.target.value,
-          message: true
-        });
-      } else {
-        this.setState({
-          point: e.target.value,
-          message: false
-        });
-      }
-      console.log(this.state);
-    };
-
-    /* {questions &&
-              questions.map(question => {
-                return (
-                  <ViewQuestion
-                    key={question.id}
-                    question={question}
-                    handleQuestionEdit={handleQuestionEdit}
-                  />
-                );
-              })}*/
     return (
       <div className="container  ">
         <div className="table">
@@ -84,7 +91,7 @@ class ViewQuestions extends Component {
                   <select
                     className="search1"
                     id="selectTopic"
-                    onChange={filterListTopic}
+                    onChange={this.filterListTopic}
                   >
                     <option value="">Konu Seç</option>
                     <option value="0tarih">Tarih</option>
@@ -99,12 +106,12 @@ class ViewQuestions extends Component {
                     <option value="1fransızca">Fransızca</option>
                   </select>
                 </th>
-                <th />
+                <th>{"Toplam :" + this.state.questions.length}</th>
                 <th>
                   <select
                     className="search2"
                     id="selectPoint"
-                    onChange={filterListPoint}
+                    onChange={this.filterListPoint}
                   >
                     <option value="">Puan</option>
                     <option value="1">1</option>
