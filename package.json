@@ -1,5 +1,5 @@
 {
-  "name": "sorular",
+  "name": "sorular_firestore",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
